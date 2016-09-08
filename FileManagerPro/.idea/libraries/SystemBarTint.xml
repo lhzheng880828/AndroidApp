@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="SystemBarTint">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/SystemBarTint.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

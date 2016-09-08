@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/tl_header"
+        layout="@layout/item_activity_header" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:text="@string/feedback_content"
+        android:padding="@dimen/view_common_padding"
+        android:layout_below="@id/tl_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/et_content"
+        android:hint="@string/leave_msg"
+        style="@style/FeedBack.EditText"
+        android:layout_margin="@dimen/view_common_margin"
+        android:layout_below="@id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_contact"
+        android:text="@string/please_add_contact"
+        android:padding="@dimen/view_common_padding"
+        android:layout_below="@id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/et_contact"
+        android:hint="@string/leave_contact"
+        style="@style/FeedBack.EditText"
+        android:minLines="1"
+        android:maxLines="1"
+        android:layout_below="@id/tv_contact"
+        android:layout_margin="@dimen/view_common_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ProgressBar
+        android:id="@+id/pb_progress"
+        style="?android:progressBarStyle"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/et_contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

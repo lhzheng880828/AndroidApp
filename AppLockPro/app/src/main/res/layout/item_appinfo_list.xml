@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="5dp"
+    android:background="@android:drawable/list_selector_background"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <CheckBox
+        android:id="@+id/cb_modify"
+        android:clickable="false"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:scaleType="fitCenter"
+        android:layout_toRightOf="@id/cb_modify"
+        android:layout_centerVertical="true"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_toRightOf="@id/iv_icon"
+        android:layout_alignTop="@id/iv_icon"
+        android:paddingLeft="5dp"
+        android:textSize="12dp"
+        android:text="dummy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_alignLeft="@id/tv_name"
+        android:layout_below="@id/tv_name"
+        android:paddingLeft="5dp"
+        android:textSize="10dp"
+        android:text="dummy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_location"
+        android:paddingLeft="5dp"
+        android:layout_below="@id/tv_name"
+        android:layout_alignParentRight="true"
+        android:textSize="10dp"
+        android:text="location_dummy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_size"
+        android:paddingRight="5dp"
+        android:layout_below="@id/tv_location"
+        android:layout_alignParentRight="true"
+        android:textSize="10dp"
+        android:text="size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

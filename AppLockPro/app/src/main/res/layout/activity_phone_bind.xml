@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/tl_header"
+        layout="@layout/item_activity_header"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <fragment
+        android:id="@+id/fragment_smscode"
+        android:name="com.eeontheway.android.applocker.login.SmscodeCheckFragment"
+        android:layout_marginTop="@dimen/view_larget_margin"
+        android:layout_marginRight="@dimen/view_width_padding"
+        android:layout_marginLeft="@dimen/view_width_padding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_sumbit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/view_larget_margin"
+        android:layout_marginRight="@dimen/view_width_padding"
+        android:layout_marginLeft="@dimen/view_width_padding"
+        android:background="@drawable/login_button_selector"
+        android:textColor="@color/white"
+        android:text="@string/bind_phone">
+    </Button>
+
+    <TextView
+        android:id="@+id/tv_skip"
+        android:gravity="right"
+        android:text="暂不绑定，跳过 >>"
+        android:textColor="@color/colorSecondTextColor"
+        android:paddingRight="@dimen/view_width_padding"
+        android:layout_marginTop="@dimen/view_width_padding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

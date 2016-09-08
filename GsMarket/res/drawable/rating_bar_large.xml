@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@android:id/background"
+        android:drawable="@drawable/stars_single_gray_big"/>
+    <item
+        android:id="@android:id/secondaryProgress"
+        android:drawable="@drawable/stars_single_gray_yellow_big"/>
+    <item
+        android:id="@android:id/progress"
+        android:drawable="@drawable/stars_single_yellow_big"/>
+
+</layer-list>

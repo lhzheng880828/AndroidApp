@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_item"
+    android:padding="@dimen/view_common_margin"
+    android:background="@drawable/background_normal_clickable_item"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <CheckBox
+        android:id="@+id/cb_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:src="@drawable/ic_clock"
+        android:scaleType="fitCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/view_common_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_start_time"
+            android:text="@string/start_time"
+            style="@style/Common.MidTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_end_time"
+            android:text="@string/end_time"
+            style="@style/Common.MidTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_day"
+            android:text="test"
+            style="@style/Common.TinyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <CheckBox
+        android:id="@+id/cb_enable"
+        android:gravity="center"
+        android:button="@null"
+        android:layout_marginLeft="@dimen/view_common_margin"
+        android:background="@drawable/applock_background_selector"
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
+</LinearLayout>

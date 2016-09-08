@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/colorSecondaryBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/tl_header"
+        layout="@layout/item_activity_header"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TableLayout
+        android:id="@+id/tl_login"
+        android:layout_margin="@dimen/view_width_padding"
+        android:layout_below="@id/tl_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TableRow
+            android:padding="@dimen/view_width_padding"
+            android:background="@drawable/bg_border_color_white">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_account"/>
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/view_common_margin"
+                android:background="#d2d2d2" />
+            <EditText
+                android:id="@+id/et_account"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/view_width_padding"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="@string/login_account_alert"
+                android:textColor="@color/colorSecondTextColor"/>
+        </TableRow>
+        <TableRow
+            android:padding="@dimen/view_width_padding"
+            android:layout_marginTop="@dimen/view_common_margin"
+            android:background="@drawable/bg_border_color_white">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_passsword"/>
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/view_common_margin"
+                android:background="#d2d2d2" />
+            <EditText
+                android:id="@+id/et_first_password"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/view_width_padding"
+                android:inputType="textPassword"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="@string/please_input_password"
+                android:textColor="@color/colorSecondTextColor"/>
+        </TableRow>
+        <TableRow
+            android:id="@+id/tr_secondPassword"
+            android:visibility="gone"
+            android:padding="@dimen/view_width_padding"
+            android:layout_marginTop="@dimen/view_common_margin"
+            android:background="@drawable/bg_border_color_white">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="确认密码"/>
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/view_common_margin"
+                android:background="#d2d2d2" />
+            <EditText
+                android:id="@+id/et_second_password"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/view_width_padding"
+                android:inputType="textPassword"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="@string/please_input_password_again"
+                android:textColor="@color/colorSecondTextColor"/>
+        </TableRow>
+        <Button
+            android:id="@+id/btn_sumbit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/view_larget_margin"
+            android:background="@drawable/login_button_selector"
+            android:textColor="@color/white"
+            android:text="@string/fill_complete">
+        </Button>
+    </TableLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_login"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_margin="@dimen/view_width_padding"
+        android:layout_below="@id/tl_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_other_login"
+            android:text="@string/forget_pass_and_reset_via_smscode"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/small_text_size"
+            android:textColor="@color/colorSecondTextColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_create_account"
+            android:text="@string/i_want_create_a_account"
+            android:textColor="@color/colorSecondTextColor"
+            android:gravity="center"
+            android:layout_below="@id/ll_login"
+            android:layout_marginTop="@dimen/view_larget_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ViewStub
+        android:id="@+id/vs_register_mode"
+        android:layout_below="@id/ll_login"
+        android:layout="@layout/item_other_register_way"
+        android:layout_marginTop="@dimen/view_width_padding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true" >
+        <shape android:shape="rectangle">
+            <padding
+                android:top="@dimen/view_common_padding"
+                android:bottom="@dimen/view_common_padding"
+                android:right="@dimen/view_common_padding"
+                android:left="@dimen/view_common_padding"/>
+            <solid android:color="@color/white" />
+            <stroke
+                android:color="@color/red"
+                android:width="1px"/>
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:top="@dimen/view_common_padding"
+                android:bottom="@dimen/view_common_padding"
+                android:right="@dimen/view_common_padding"
+                android:left="@dimen/view_common_padding"/>
+            <solid android:color="@android:color/white" />
+            <stroke
+                android:color="@color/black"
+                android:width="1px"/>
+        </shape>
+    </item>
+</selector>

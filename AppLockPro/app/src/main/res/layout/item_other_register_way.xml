@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_register_way"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/tv_login_account"
+        android:layout_below="@id/tl_login"
+        android:text="@string/i_have_a_account"
+        android:textColor="@color/colorSecondTextColor"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/view_larget_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

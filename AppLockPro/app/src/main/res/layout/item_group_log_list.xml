@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="@dimen/viewNormalMargin"
+    android:descendantFocusability="blocksDescendants"
+    android:background="@drawable/list_header_background"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:paddingLeft="@dimen/viewNormalMargin"
+        android:text="@string/name"
+        style="@style/Common.TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_childcount"
+        android:paddingLeft="@dimen/viewNormalMargin"
+        android:layout_weight="1"
+        style="@style/Common.TextView"
+        android:text="@string/child_selected_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <CheckBox
+        android:id="@+id/cb_select_all"
+        android:text="@string/select_all"
+        android:clickable="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

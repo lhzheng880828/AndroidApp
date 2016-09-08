@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/Description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/contact_80dp"
+        android:layout_marginTop="@dimen/contact_10dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="@string/comment"
+        android:textColor="@color/textvolor_3b86dc"
+        android:textSize="@dimen/textsize_18sp" />
+
+    <TextView
+        android:id="@+id/commenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Description"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="@string/description"
+        android:textSize="@dimen/textsize_18sp" />
+
+    <RatingBar
+        android:id="@+id/comment_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/uninstaill_margin_right"
+        android:layout_below="@id/Description"
+        android:layout_marginLeft="@dimen/contact_20dp"
+        android:layout_marginTop="@dimen/button_margin_top"
+        android:layout_toRightOf="@id/commenter"
+        android:numStars="5"
+        android:progressDrawable="@drawable/food_rating_bar_full"
+        android:textSize="@dimen/textsize_18sp" />
+
+    <TextView
+        android:id="@+id/comment_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/commenter"
+        android:text="@string/description"
+        android:textSize="@dimen/textsize_16sp" />
+
+    <TextView
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/comment_content"
+        android:layout_marginTop="@dimen/contact_10dp"
+        android:background="@drawable/bitmap_repate" />
+
+</RelativeLayout>

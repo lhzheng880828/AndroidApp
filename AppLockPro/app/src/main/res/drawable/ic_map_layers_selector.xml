@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <layer-list>
+            <item android:drawable="@drawable/ic_map_layers"/>
+            <item>
+                <shape android:shape="rectangle">
+                    <solid
+                        android:color="#6a808080"/>
+                    <stroke
+                        android:color="#6a403e3e"
+                        android:width="2px"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <item
+        android:drawable="@drawable/ic_map_layers" />
+</selector>

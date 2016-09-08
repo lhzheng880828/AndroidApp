@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/map_baidu"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true" />
+    <LinearLayout
+        android:id="@+id/ll_search"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/view_width_padding"
+        android:gravity="center"
+        android:paddingLeft="@dimen/view_common_padding"
+        android:background="@drawable/toolbar_header_background"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <AutoCompleteTextView
+            android:id="@+id/act_search"
+            android:drawableLeft="@drawable/ic_search"
+            android:layout_marginLeft="@dimen/view_common_margin"
+            android:hint="@string/please_input_search_address"
+            android:imeOptions="actionSearch"
+            style="@style/Common.EditText"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/bt_search"
+            android:background="@drawable/btn_background_green_selector"
+            android:layout_margin="@dimen/view_common_margin"
+            android:text="@string/search"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_zoom"
+        android:orientation="vertical"
+        android:divider="@drawable/list_divider_no_width"
+        android:showDividers="middle"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/view_larget_margin"
+        android:layout_marginBottom="@dimen/view_larget_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/iv_layers"
+            android:button="@null"
+            android:background="@drawable/ic_map_layers_selector"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+        <ImageView
+            android:id="@+id/bt_show_my_location"
+            android:src="@drawable/ic_my_location"
+            android:layout_marginTop="@dimen/view_larget_margin"
+            android:background="@drawable/mylocation_button_background_selector"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+    </LinearLayout>
+</RelativeLayout>

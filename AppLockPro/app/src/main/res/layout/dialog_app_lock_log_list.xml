@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/comm_dialog_background"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tv_header"
+        android:background="@color/colorPrimary"
+        android:text="@string/attention"
+        android:padding="@dimen/view_common_margin"
+        android:gravity="center"
+        android:textSize="@dimen/large_text_size"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/ll_msg"
+        android:orientation="vertical"
+        android:padding="@dimen/view_larget_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_appName"
+            android:textSize="@dimen/small_text_size"
+            android:text="@string/appLocker_err_detect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_error_count"
+            android:text="@string/password_err_counter"
+            android:textSize="@dimen/small_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_time"
+            android:text="@string/time_args"
+            android:textSize="@dimen/small_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_location"
+            android:text="@string/location_args"
+            android:textSize="@dimen/small_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_photo"
+        android:src="@drawable/icon_person"
+        android:scaleType="fitCenter"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/view_common_margin"
+        android:layout_above="@id/ll_msg"
+        android:layout_below="@id/tv_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

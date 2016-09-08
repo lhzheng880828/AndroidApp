@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/textfield_default"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <!-- textfield_default -->
+
+    <RelativeLayout
+        android:layout_width="@dimen/gridview_item_width"
+        android:layout_height="@dimen/gridview_item_height"
+        android:paddingLeft="@dimen/search_button_marginright"
+        android:paddingRight="@dimen/search_button_marginright" >
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/appsize_width"
+            android:layout_height="@dimen/appsize_width"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/search_button_marginright"
+            android:src="@drawable/icon_default" />
+
+        <TextView
+            android:id="@+id/appname"
+            android:layout_width="@dimen/app_name_width"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/icon"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize_18sp" />
+        <!--
+             <com.base.module.pack.ui.FrameImageView
+            android:id="@+id/operator_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@anim/update_anim"
+            android:visibility="gone" />
+        -->
+
+        <RatingBar
+            android:id="@+id/grade"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/uninstaill_margin_right"
+            android:layout_below="@id/appname"
+            android:layout_marginTop="@dimen/button_margin_top"
+            android:layout_toRightOf="@id/icon"
+            android:isIndicator="true"
+            android:maxHeight="20dp"
+            android:minHeight="20dp"
+            android:numStars="5"
+            android:progressDrawable="@drawable/food_rating_bar_full"
+            android:rating="2.5" />
+
+        <TextView
+            android:id="@+id/size"
+            android:layout_width="@dimen/appsize_width"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/grade"
+            android:layout_toRightOf="@id/icon"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/textvolor_414141"
+            android:textSize="@dimen/textsize_14sp" />
+
+        <TextView
+            android:id="@+id/charge"
+            android:layout_width="@dimen/appcharg_width"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/grade"
+            android:layout_toRightOf="@id/size"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/textvolor_3b86dc"
+            android:textSize="@dimen/textsize_14sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/downLayout"
+        android:layout_width="@dimen/down_button_width"
+        android:layout_height="@dimen/down_button_height"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/app_down_button_blue"
+        android:gravity="center" >
+
+        <!-- app_down_button_blue -->
+
+        <ImageView
+            android:id="@+id/downBtnimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:src="@drawable/btn_icon_download" />
+
+        <TextView
+            android:id="@+id/downButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/contact_15dp"
+            android:singleLine="true"
+            android:text="@string/to_download"
+            android:focusable="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_22px" />
+    </LinearLayout>
+
+</LinearLayout>

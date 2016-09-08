@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 自动更新配置 -->
+    <string name="updateInfoUrl">http://localhost/updateinfo.xml</string>
+    <string name="autoupdateKey">auto_update</string>
+</resources>

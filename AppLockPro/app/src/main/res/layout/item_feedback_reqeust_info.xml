@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    style="@style/FeedBack.CardView"
+    android:clickable="true"
+    android:background="@drawable/background_normal_clickable_item"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="@dimen/view_common_padding"
+        android:clickable="false"
+        android:layout_margin="@dimen/view_common_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_reqeust_title"
+            android:text="@string/feed_back_content"
+            android:clickable="false"
+            android:textSize="@dimen/small_text_size"
+            android:textColor="@color/colorSecondTextColor"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/et_request_content"
+            android:clickable="false"
+            android:layout_weight="1"
+            style="@style/FeedBack.EditText"
+            android:layout_marginTop="@dimen/view_common_margin"
+            android:layout_marginBottom="@dimen/view_common_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/ll_reqeust_footer"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_reqeust_time"
+                android:src="@drawable/ic_clock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_reqeust_time"
+                android:text="@string/feed_back_time"
+                android:clickable="false"
+                android:textSize="@dimen/small_text_size"
+                android:textColor="@color/colorSecondTextColor"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/view_common_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_reqeust_responsed"
+                android:text="@string/not_replyed"
+                android:clickable="false"
+                android:textColor="@color/colorSecondTextColor"
+                android:textSize="@dimen/small_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+ </android.support.v7.widget.CardView>

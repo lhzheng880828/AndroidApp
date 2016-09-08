@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NumberPasswordView">
+        <attr name="button_text" format="string|reference" />
+        <attr name="edittext_hint" format="string|reference" />
+        <attr name="setpass_mode" format="boolean" />
+        <attr name="passwordErrorDelay" format="integer" />
+        <attr name="maxRetryCount" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="ListHeaderView">
+        <attr name="header_title" format="string|reference" />
+        <attr name="textColor" format="color|reference" />
+        <attr name="textSize" format="dimension|reference" />
+        <attr name="checkAll_text" format="string|reference" />
+    </declare-styleable>
+</resources>

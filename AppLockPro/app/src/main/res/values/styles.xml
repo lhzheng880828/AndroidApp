@@ -1,0 +1,143 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">#161515</item>
+        <item name="android:textSize">14sp</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ToolBarTextStyle" parent="AppTheme">
+        <item name="actionMenuTextColor">@color/white</item>
+    </style>
+
+    <style name="Activity.NoTitleFullScreen" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Activity.NoTitle" parent="AppTheme">
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Common.EditText" parent="AppTheme">
+        <item name="android:background">@drawable/edittext_background_selector</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="Common.FunctionButton" parent="AppTheme">
+    </style>
+
+    <style name="Common.TextView" parent="AppTheme">
+        <item name="android:textSize">15dp</item>
+    </style>
+
+    <style name="Common.MidTextView" parent="AppTheme">
+        <item name="android:textSize">13dp</item>
+    </style>
+
+    <style name="Common.TinyTextView" parent="AppTheme">
+        <item name="android:textSize">10dp</item>
+    </style>
+
+    <style name="FeedBack.EditText" parent="AppTheme">
+        <item name="android:background">@drawable/edittext_background_selector</item>
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:minLines">5</item>
+        <item name="android:padding">@dimen/view_common_padding</item>
+        <item name="android:gravity">left|top</item>
+    </style>
+
+    <style name="FeedBack.CardView" parent="AppTheme">
+        <item name="cardElevation">5dp</item>
+        <item name="cardCornerRadius">5dp</item>
+        <item name="cardBackgroundColor">@color/colorFirstBackground</item>
+    </style>
+
+    <style name="Password.Pad" parent="AppTheme">
+        <item name="android:layout_weight">1</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:background">@color/trans</item>
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="mainLeftDrawerButton" parent="AppTheme">
+        <item name="android:background">@drawable/trans_button_selector</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
+        <item name="android:paddingLeft">@dimen/view_common_padding</item>
+        <item name="android:gravity">left|center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="dialogActivity_bottom" parent="Base.Theme.AppCompat.Light.Dialog">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="loginButton" parent="AppTheme">
+        <item name="android:background">@drawable/login_button_selector</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="dayCheck" parent="AppTheme">
+        <item name="android:button">@null</item>
+        <item name="android:checked">true</item>
+        <item name="android:textColor">@drawable/day_textcolor_selector</item>
+        <item name="android:background">@drawable/day_background_selector</item>
+        <item name="android:padding">@dimen/view_common_padding</item>
+        <item name="android:textSize">@dimen/normal_text_size</item>
+    </style>
+
+    <style name="Bubble.TextAppearance.Dark" parent="android:TextAppearance.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#ff7f7f7f</item>
+    </style>
+
+    <style name="Bubble.TextAppearance.Light" parent="Bubble.TextAppearance.Dark">
+        <item name="android:textColor">#ffeeeeee</item>
+    </style>
+
+    <style name="ClusterIcon.TextAppearance" parent="android:TextAppearance">
+        <item name="android:textColor">#ffeeeeee</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- 浮动按钮 -->
+    <style name="FloatingActionButton" parent="AppTheme">
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginBottom">40dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- 列表底部的删除按钮 -->
+    <style name="ListDelButton" parent="AppTheme">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:layout_margin">@dimen/view_common_margin</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:background">@drawable/button_delte_selector</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+
+    </style>
+</resources>

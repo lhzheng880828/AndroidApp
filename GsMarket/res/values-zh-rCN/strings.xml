@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="menu_search">search</string>
+    <string name="show">Show</string>
+    <string name="menu_overflow">overflow</string>
+    <string name="appname">GS应用市场</string>
+    <string name="back">返回</string>
+    <string name="download">下载</string>
+    <string name="no_application">没有应用!</string>
+    <string name="getapplistfail">获取应用列表失败!</string>
+    <string name="loading">正在加载中...</string>
+    <string name="no_selected_item">未选中项目</string>
+    <string name="to_open">打开</string>
+    <string name="to_download">下载</string>
+    <string name="to_update">更新</string>
+    <string name="charge">收费</string>
+    <string name="free">免费</string>
+    <string name="hot_label">热门</string>
+    <string name="app_label">应用</string>
+    <string name="game_label">游戏</string>
+    <string name="tools_label">工具</string>
+    <string name="installed">已安装</string>
+    <string name="downloading">正在下载...</string>
+    <string name="comment">评论</string>
+    <string name="rating">评分</string>
+    <string name="rate_comment">评分和评论</string>
+    <string name="comment_hint">添加评论</string>
+    <string name="version">版本</string>
+    <string name="submit">提交</string>
+    <string name="publishtime">发布日期</string>
+    <string name="description">软件介绍</string>
+    <string name="load_more_comment">加载更多</string>
+    <string name="new_version">新版本</string>
+    <string name="current_version">当前版本</string>
+    <string name="installing">正在安装...</string>
+    <string name="to_install">安装</string>
+    <string name="comment_success">评论成功!</string>
+    <string name="comment_failed">评论失败!</string>
+    <string name="commenting">正在提交, 请稍候.</string>
+    <string name="empty_waring">内容不能为空!</string>
+    <string name="wating">等待...</string>
+    <string name="get_comment_failed">获取评论失败!</string>
+     <string name="cancel">取消</string>
+     <string name="can_update">可更新</string>
+     <string name="update_fail">更新失败</string>
+     <string name="uninstalled">已卸载</string>
+     <string name="waiting">请稍候</string>
+     <string name="download_fail">下载失败!</string>
+     <string name="install_fail">安装失败!</string>
+     <string name="no_load">没有加载</string>
+     <string name="storage">存储</string>
+</resources>

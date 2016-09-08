@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorSecondaryBackground"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.eeontheway.android.applocker.ui.ListHeaderView
+        android:id="@+id/ll_header"
+        app:textColor="@color/colorSecondTextColor"
+        app:checkAll_text="@string/select_all"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/bt_del"
+        android:text="@string/delete"
+        style="@style/ListDelButton"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcv_list"
+        android:scrollbars="vertical"
+        android:layout_below="@id/ll_header"
+        android:layout_above="@id/bt_del"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:text="@string/empty_lock_time_config"
+        android:textColor="@color/colorSecondTextColor"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add"
+        app:fabSize="mini"
+        android:src="@drawable/ic_add"
+        style="@style/FloatingActionButton"/>
+
+</RelativeLayout>

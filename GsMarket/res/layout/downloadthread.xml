@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:Android="http://schemas.android.com/apk/res/android"
+	Android:orientation="vertical" Android:layout_width="fill_parent"
+	Android:layout_height="fill_parent">
+	<Button Android:id="@+id/start" 
+		Android:layout_width="wrap_content" Android:layout_height="wrap_content"
+		Android:onClick="startDownload" />
+	<Button Android:id="@+id/query"
+		Android:layout_width="wrap_content" Android:layout_height="wrap_content"
+		Android:onClick="queryDownloadStatus" />
+	<Button Android:id="@+id/del" 
+		Android:layout_width="wrap_content" Android:layout_height="wrap_content"
+		Android:onClick="delDownloads" />
+		<Button Android:id="@+id/see" 
+		Android:layout_width="wrap_content" Android:layout_height="wrap_content"
+		Android:onClick="viewDownWindow" />
+	<TextView Android:id="@+id/tvsize" 
+		Android:layout_width="wrap_content" Android:layout_height="wrap_content" />
+	<TextView Android:id="@+id/tvinfo"
+		Android:layout_width="wrap_content" Android:layout_height="wrap_content" />
+</LinearLayout> 

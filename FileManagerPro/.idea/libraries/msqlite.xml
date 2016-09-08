@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="msqlite">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/msqlite.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
