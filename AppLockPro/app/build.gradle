@@ -2,11 +2,17 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        config {
-            keyPassword '123456'
-            storeFile file('/home/lishutong/workspace/app.lks.jks')
-            storePassword '123456'
-            keyAlias 'keykey'
+        debug {
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+        }
+        release {
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
         }
     }
     compileSdkVersion 23
@@ -29,6 +35,7 @@ android {
         }
         debug {
             //signingConfig signingConfigs.config
+
         }
     }
     sourceSets {
@@ -46,8 +53,8 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile files('libs/MobCommons.jar')
-    compile files('libs/MobTools.jar')
+    //compile files('libs/MobCommons.jar')
+    //compile files('libs/MobTools.jar')
     compile files('src/main/libs/MobCommons.jar')
     compile files('src/main/libs/MobTools.jar')
     compile files('libs/BmobSDK_V3.4.5_1111.jar')
@@ -57,7 +64,7 @@ dependencies {
     compile files('libs/GetuiSDK2.7.0.0.jar')
     compile files('libs/libammsdk.jar')
     compile files('libs/mta-sdk-1.6.2.jar')
-    compile files('libs/open_sdk_r5509.jar')
+    compile files('libs/open_sdk_r5276.jar')
     compile files('libs/json_simple-1.1.jar')
     compile files('libs/libapshare.jar')
     compile files('libs/open_sdk_r5276.jar')
