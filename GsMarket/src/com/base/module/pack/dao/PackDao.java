@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.List;
-import com.base.module.language.GuiDisplay;
+import com.base.module.pack.R;
 import com.base.module.pack.bean.Pack;
 import com.base.module.pack.common.JSONUtil;
 import com.base.module.pack.common.Log;
@@ -47,7 +47,6 @@ public class PackDao implements PackDaoInter {
     private String TAG = "DownService11";
     private SQLiteDatabase mPackManagerDB;
     private Context mContext;
-    private GuiDisplay mGuidisplay;
     //private MyTime mTime = new MyTime();
     private final String SQL = "CREATE TABLE if not exists  [package] (" + "[pack_id] INTEGER  PRIMARY KEY AUTOINCREMENT  NULL," + "[pack_name] TEXT(80)  NULL,"
             + "[pack_l_name] TEXT(80)   UNIQUE NULL," + "[pack_vesion] TEXT(80)   NULL,"+"[pack_versioncode] INTEGER NULL," + "[pack_size] LONG   NULL," + "[pack_download] TEXT(80)   NULL,"
@@ -92,14 +91,13 @@ public class PackDao implements PackDaoInter {
     public PackDao(Context context) {
         Log.i(TAG, "PackManagerDao---open database");
         mContext = context;
-        mGuidisplay = GuiDisplay.instance();
         try {
             mPackManagerDB = openDatabase();
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         }
         if (mPackManagerDB == null) {
-            Toast.makeText(mContext, mGuidisplay.getValue(mContext, 3302), Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, mContext.getString(R.string.read_data_fail_promt), Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -160,7 +158,7 @@ public class PackDao implements PackDaoInter {
             Log.e(TAG, e.toString());
         }
         if (mPackManagerDB == null) {
-            Toast.makeText(mContext, mGuidisplay.getValue(mContext, 3302), Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, mContext.getString(R.string.read_data_fail_promt), Toast.LENGTH_LONG).show();
             return;
         }
     }

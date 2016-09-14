@@ -71,7 +71,6 @@ import android.widget.ProgressBar;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
-import com.base.module.language.GuiDisplay;
 import com.base.module.pack.R;
 import com.base.module.pack.bean.ApkInfo;
 import com.base.module.pack.bean.GetApkInfo;
@@ -118,7 +117,6 @@ public class DownService extends Service {
      * more of number
      */
     private static List<String> packLNames;
-    private GuiDisplay mGuidisplay;
     /**
      * the wait tasks which is no place
      */
@@ -143,7 +141,6 @@ public class DownService extends Service {
         super.onCreate();
         mPackDao = PackDao.getInstance(getBaseContext());
         downTotalSize = 0;
-        mGuidisplay = GuiDisplay.instance();
         packLNames = new ArrayList<String>();
         mTaskPool = TaskPool.getInstance();
         mHandler = new MyHandler();
@@ -263,7 +260,7 @@ public class DownService extends Service {
             }
             if (apkinfo == null) {
 
-                showToast(mGuidisplay.getValue(this, 3357));
+                showToast(this.getString(R.string.fail_get_apk_info));
             } else {
                 boolean isUpdate = intent.getBooleanExtra("toUpdate", false);
                 String mLname = apkinfo.getPackageName();
@@ -552,12 +549,12 @@ public class DownService extends Service {
             if (values[0] == 100) {
                 removeWaiQueue(appName);
                 if (!isUpdate) {
-                    showToast(appName + " " + mGuidisplay.getValue(getBaseContext(), 3323));
+                    showToast(appName + " " + getBaseContext().getString(R.string.download_success));
                 }
             }
 
             if(values[0] == 101){
-                setNotification(appName + PackMethod.getSpace() +mGuidisplay.getValue(getBaseContext(), 3331),100,appName,true);
+                setNotification(appName + PackMethod.getSpace() +getBaseContext().getString(R.string.installing),100,appName,true);
             }
         }
 
@@ -730,30 +727,30 @@ public class DownService extends Service {
             }
             switch (msg.what) {
             case SilentInstall.INSTALL_COMPLETE:
-                if (msg.arg2 == PackageManager.INSTALL_SUCCEEDED) {
+                if (msg.arg2 == 1/*PackageManager.INSTALL_SUCCEEDED*/) {
                     if (isUpdate) {
-                        showToast(app_name + " " + mGuidisplay.getValue(getBaseContext(), 3349));
+                        showToast(app_name + " " + getBaseContext().getString(R.string.update_success));
                         pack.setPackUpdate("0");
                         pack.setPackState(0);
                         addApkInfo(pack);
                     } else {
-                        showToast(app_name + " " + mGuidisplay.getValue(getBaseContext(), 3332));
+                        showToast(app_name + " " + getBaseContext().getString(R.string.installed_success));
                         PackMethod.sendInstallSuccessBroader(getBaseContext(), l_name, app_name, downType, uri, appcode);
                     }
                 } else {
                     Log.d("no Install_succeeded");
                     if (isUpdate) {
-                        String text = app_name + Utils.getSpace() + mGuidisplay.getValue(getBaseContext(), 3350);
-                        if (msg.arg2 == PackageManager.INSTALL_FAILED_INSUFFICIENT_STORAGE) {
-                            text = mGuidisplay.getValue(getBaseContext(), 3327) + text;
+                        String text = app_name + Utils.getSpace() + getBaseContext().getString(R.string.update_failed);
+                        if (msg.arg2 == 2/*PackageManager.INSTALL_FAILED_INSUFFICIENT_STORAGE*/) {
+                            text = getBaseContext().getString(R.string.update_to) + text;
                         }
 
                         showToast(text);
                         Log.i(TAG, "Update Failed!!!");
                     } else {
-                        String text = app_name + Utils.getSpace() + mGuidisplay.getValue(getBaseContext(), 3333);
-                        if (msg.arg2 == PackageManager.INSTALL_FAILED_INSUFFICIENT_STORAGE) {
-                            text = mGuidisplay.getValue(getBaseContext(), 3327) + text;
+                        String text = app_name + Utils.getSpace() + getBaseContext().getString(R.string.app_detail);
+                        if (msg.arg2 == 3/*PackageManager.INSTALL_FAILED_INSUFFICIENT_STORAGE*/) {
+                            text =getBaseContext().getString(R.string.update_to) + text;
                         }
                         showToast(text);
                         Log.i(TAG, "Install Failed!!!");
@@ -769,9 +766,9 @@ public class DownService extends Service {
             case Pack.STATE_ER_DOWN: {
                 Log.d("Pack state_er_down " + isUpdate);
                 if (isUpdate) {
-                    showToast(app_name + " " + mGuidisplay.getValue(getBaseContext(), 3350));
+                    showToast(app_name + " " + getBaseContext().getString(R.string.update_failed));
                 } else {
-                    showToast(app_name + " " + mGuidisplay.getValue(getBaseContext(), 3315) + " !");
+                    showToast(app_name + " " +getBaseContext().getString(R.string.download_fail) + " !");
                     Log.i(TAG, "Down Failed!!!");
                 }
                 //setNotification();
@@ -816,7 +813,7 @@ public class DownService extends Service {
             mNotification.contentView.setViewVisibility(R.id.install_notice_processlayout, View.GONE);
             mNotification.contentView.setViewVisibility(R.id.install_notice_title_progress,View.VISIBLE);
             mNotification.contentView.setTextViewText(R.id.install_notice_title_progress, "   ("
-                    + packLNames.size() + PackMethod.getSpace() + mGuidisplay.getValue(getBaseContext(), 3355) + ")");
+                    + packLNames.size() + PackMethod.getSpace() + getBaseContext().getString(R.string.app_in_list) + ")");
             manager.notify(mNotice_id, mNotification);
         }else{
             manager.cancelAll();//cancel(mNotice_id);
@@ -845,11 +842,11 @@ public class DownService extends Service {
             Log.d(msg.arg1 + " " +msg.arg2);
             switch (msg.what) {
             case TOAST_ARG_0: {
-                showToast(mGuidisplay.getValue(getBaseContext(), msg.arg1));
+               // showToast(getBaseContext().getString(R.string.(msg.arg1)));
                 break;
             }
             case TOAST_ARG_1: {
-                showToast(msg.obj + Utils.getSpace() + mGuidisplay.getValue(getBaseContext(), msg.arg1));
+                //showToast(msg.obj + Utils.getSpace() + mGuidisplay.getValue(getBaseContext(), msg.arg1));
                 break;
             }
             /*case TOAST_ARG_2: {
@@ -898,9 +895,9 @@ public class DownService extends Service {
             }
             String noticeTitle = "";
             if (!isUpdate) {
-                noticeTitle =pack.getPackName() + PackMethod.getSpace() + mGuidisplay.getValue(getBaseContext(), 3325);
+                noticeTitle =pack.getPackName() + PackMethod.getSpace() + getBaseContext().getString(R.string.downloading);
             } else{
-                noticeTitle =pack.getPackName() + PackMethod.getSpace() + mGuidisplay.getValue(getBaseContext(), 61);
+                noticeTitle =pack.getPackName() + PackMethod.getSpace() + getBaseContext().getString(R.string.loading);
             }
 
             setNotification(noticeTitle,0,pack.getPackName(),false);

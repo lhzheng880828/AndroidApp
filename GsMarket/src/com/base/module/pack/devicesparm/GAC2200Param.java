@@ -12,6 +12,6 @@ public class GAC2200Param extends AbstractDeviceParm {
 
     @Override
     String deviceType() {
-        return "gac2200";
+        return "GXV32XX";
     }
 }

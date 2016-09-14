@@ -30,7 +30,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
-import com.base.module.language.GuiDisplay;
 import com.base.module.pack.R;
 import com.base.module.pack.main.AppActivity;
 import com.base.module.pack.main.Download;
@@ -43,19 +42,17 @@ public class FailNotice {
     private Notification mDownNotification = null;
     private Notification.Builder notification = null;
     private NotificationManager mManager = null;
-    private GuiDisplay mGuidisplay;
 
     public FailNotice(Context context) {
         mContext = context;
         mManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-        mGuidisplay = GuiDisplay.instance();
     }
 
     public void setFailNotice(int count) {
         if(count<=0 && mManager!=null){
             mManager.cancel(mNotice_id);
         }else{
-            String showtext = count + PackMethod.getSpace() + mGuidisplay.getValue(mContext, 3352);
+            String showtext = count + PackMethod.getSpace() + mContext.getString(R.string.app_down_fail);
             if(mDownNotification==null){
                 Intent intent = new Intent();
                 intent.setClass(mContext, ExpandActivity.class);
@@ -63,7 +60,7 @@ public class FailNotice {
 
                 notification = new Notification.Builder(mContext);
                 notification.setTicker(showtext)
-                .setContentTitle(mGuidisplay.getValue(mContext, 3353) + ": ")
+                //.setContentTitle(mGuidisplay.getValue(mContext, 3353) + ": ")
                 .setContentText(showtext)
                 .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true)

@@ -91,4 +91,26 @@
     <string name="no_load">No load</string>
     <string name="storage">Storage</string>
     <string name="empty_waring"> Content can not be empty!</string>
+    <string name="low_space_promt">No enough storage space. Please clean up!</string>
+    <string name="read_data_fail_promt">Data reading failed. Please restart!</string>
+    <string name="pkg_exist">already exists in the download list!</string>
+    <string name="app_exist">The App already exists!</string>
+    <string name="fail_get_apk_info">Failed to get the apk info!</string>
+    <string name="url_error">Wrong URI!</string>
+    <string name="down_install">Download/Install</string>
+    <string name="delete_record">Delete recording</string>
+    <string name="uninstall">Uninstall</string>
+    <string name="menu">Menu</string>
+    <string name="open">Open</string>
+    <string name="update">Update</string>
+    <string name="apps">app (s)</string>
+    <string name="download_success">downloaded successfully!</string>
+    <string name="installed_success">installed successfully!</string>
+    <string name="update_success">is updated successfully!</string>
+    <string name="update_failed">is updated unsuccessfully!</string>
+    <string name="update_to">Update to</string>
+    <string name="app_detail">App details</string>
+    <string name="app_in_list">app (s) in list</string>
+    <string name="app_down_fail">app (s) download/ update failed!</string>
+    <string name="fail_promt">Failure notification</string>
 </resources>

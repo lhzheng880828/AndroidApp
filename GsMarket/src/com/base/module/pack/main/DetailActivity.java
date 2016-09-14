@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import com.base.module.language.GuiDisplay;
 import com.base.module.pack.R;
 import com.base.module.pack.common.Log;
 import com.base.module.pack.listener.CustomWebViewDownLoadListener;
@@ -28,7 +27,6 @@ import com.base.module.pack.method.PackMethod;
  */
 public class DetailActivity extends Activity {
 
-    private GuiDisplay mGuidisplay = GuiDisplay.instance();
     private WebView detailweb;
     private BroadcastReceiver updateBroadcastReceiver;
 
@@ -41,7 +39,7 @@ public class DetailActivity extends Activity {
         String url = intent.getStringExtra(ApkListFragment.CLICKURLITENTEXTRANAME);
         detailweb = (WebView) this.findViewById(R.id.detail);
         final ProgressDialog mProgressDialog = new ProgressDialog(DetailActivity.this);
-        mProgressDialog.setMessage(mGuidisplay.getValue(DetailActivity.this, 3361));
+        mProgressDialog.setMessage(this.getString(R.string.loading));
         mProgressDialog.show();
         detailweb.loadUrl(url);
         detailweb.getSettings().setJavaScriptEnabled(true);

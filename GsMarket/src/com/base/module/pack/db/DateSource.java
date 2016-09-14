@@ -38,7 +38,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
-import com.base.module.language.GuiDisplay;
+import com.base.module.pack.R;
 public class DateSource {
     protected static final String TAG = "DateSource";
     private final static String DATABASE_PATH = "/data/data/com.base.module.pack/databases";
@@ -46,7 +46,6 @@ public class DateSource {
     private static String PREFS_NAME = "Package_Manager_Option";
     private static SQLiteDatabase mDatabase = null;
     private static String mDatabaseFilename = DATABASE_PATH + "/" + DATABASE_FILENAME;
-    private static GuiDisplay mGuidisplay = GuiDisplay.instance();
 
     public static synchronized SQLiteDatabase getDateSource(Context mContext) {
         try {
@@ -73,7 +72,7 @@ public class DateSource {
             return mDatabase;
         } catch (Exception e) {
             Log.e(TAG, "error open datebase---" + e.toString());
-            Toast.makeText(mContext, mGuidisplay.getValue(mContext, 3301), Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, mContext.getString(R.string.low_space_promt), Toast.LENGTH_LONG).show();
         }
         return null;
     }

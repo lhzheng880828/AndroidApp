@@ -6,7 +6,7 @@ import android.os.Looper;
 import android.webkit.DownloadListener;
 import android.widget.Toast;
 
-import com.base.module.language.GuiDisplay;
+import com.base.module.pack.R;
 import com.base.module.pack.bean.ApkInfo;
 import com.base.module.pack.bean.GetApkInfo;
 import com.base.module.pack.bean.Pack;
@@ -29,7 +29,6 @@ public class CustomWebViewDownLoadListener implements DownloadListener {
 
     private  Toast mToast;
 
-    private GuiDisplay mGuidisplay = GuiDisplay.instance();
 
     public CustomWebViewDownLoadListener(Activity activity) {
         context = activity.getBaseContext();
@@ -73,12 +72,12 @@ public class CustomWebViewDownLoadListener implements DownloadListener {
                     } else if (state < Pack.STATE_INSTALL) {//in down or installing
                         Toast.makeText(context,
                                 apkinfo.getAppname() + Utils.getSpace()
-                                + mGuidisplay.getValue(context, 3321),
+                                + context.getString(R.string.pkg_exist),
                                 Toast.LENGTH_LONG).show();
                     } else if (now_version != null && new_version != null && !now_version.equals(new_version)) { //update
                         PackMethod.update(context, apkinfo.getPackageName(), url, apkinfo);
                     } else { //already exist
-                        showToast(mGuidisplay.getValue(context, 3310),context);
+                        showToast(context.getString(R.string.app_exist), context);
 
                     }
                 } catch (Exception e) {
@@ -88,10 +87,10 @@ public class CustomWebViewDownLoadListener implements DownloadListener {
                     packDao.close();
                 }
             } else {
-                showToast(mGuidisplay.getValue(context, 3357),context);
+                showToast(context.getString(R.string.fail_get_apk_info),context);
             }
         } else {
-            showToast(mGuidisplay.getValue(context, 3343),context);
+            showToast(context.getString(R.string.url_error),context);
         }
     }
 

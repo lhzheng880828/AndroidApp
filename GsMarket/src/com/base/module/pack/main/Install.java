@@ -38,7 +38,6 @@ import android.os.Message;
 import android.view.*;
 import android.widget.ListView;
 import android.widget.TextView;
-import com.base.module.language.GuiDisplay;
 import com.base.module.pack.R;
 import com.base.module.pack.adapter.InstallAdapter;
 import com.base.module.pack.bean.Pack;
@@ -62,7 +61,6 @@ public class Install extends Fragment {
     private IntentFilter mFilter;
     private TextView mTitle;
     private int mRegisterTag = 0;
-    private GuiDisplay mGuidisplay;
 
     private Update UpdateService;
     private long mUpdateCount = 0;
@@ -87,7 +85,6 @@ public class Install extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.install, container, false);
-        mGuidisplay = GuiDisplay.instance();
         mTitle = (TextView)inflate.findViewById(R.id.install_title);
         mInstallLv = (ListView) inflate.findViewById(R.id.install_lv);
 
@@ -118,9 +115,9 @@ public class Install extends Fragment {
             }
             mPacks = mPackDao.findInstall();
             mUpdateCount = mPackDao.getUpdateCount();
-            mTitle.setText(mGuidisplay.getValue(this.getActivity(), 3344) + " " + mPacks.size() + " "
-                    + mGuidisplay.getValue(this.getActivity(), 3345) + ". " + mUpdateCount
-                    + " " + mGuidisplay.getValue(this.getActivity(), 3346) + ".");
+            mTitle.setText(this.getString(R.string.installed) + " " + mPacks.size() + " "
+                    + this.getString(R.string.apps) + ". " + mUpdateCount
+                    + " " + this.getString(R.string.can_update) + ".");
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         }

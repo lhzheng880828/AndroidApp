@@ -46,7 +46,6 @@ import android.view.*;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
-import com.base.module.language.GuiDisplay;
 import com.base.module.pack.R;
 import com.base.module.pack.adapter.DownloadAdapter;
 import com.base.module.pack.bean.Pack;
@@ -71,7 +70,6 @@ public class Download extends Fragment {
     private ListView mDownsLv;
     private IntentFilter mFilter;
     private int mRegisterTag = 0;
-    private GuiDisplay mGuidisplay;
     private SharedPreferences.Editor shEditor =null;
     /**
      * Safe to hold on to this.
@@ -88,7 +86,6 @@ public class Download extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.download, container, false);
-        mGuidisplay = GuiDisplay.instance();
         mTaskPool = TaskPool.getInstance();
         shEditor = getActivity().getSharedPreferences("com.moudle.base.pack.downloadproess", 0).edit();
         mDownsLv = (ListView) inflate.findViewById(R.id.download_lv);
@@ -124,18 +121,18 @@ public class Download extends Fragment {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
         int position = ((AdapterContextMenuInfo) menuInfo).position;
         int state = mPacks.get(mPackNames.get(position)).getPackState();
-        menu.setHeaderTitle(mGuidisplay.getValue(this.getActivity(), 46));
+        menu.setHeaderTitle(this.getString(R.string.menu));
         if (state >= Pack.STATE_INSTALL) {
-            menu.add(0, MENU_CONTEXT_OPEN, 1, mGuidisplay.getValue(this.getActivity(), 67));
-            menu.add(0, MENU_CONTEXT_UNINSTALL, 2, mGuidisplay.getValue(this.getActivity(), 3311));
+            menu.add(0, MENU_CONTEXT_OPEN, 1, this.getString(R.string.open));
+            menu.add(0, MENU_CONTEXT_UNINSTALL, 2,this.getString(R.string.uninstall));
             if (state == Pack.STATE_UPDATE || state == Pack.STATE_ER_UPDATE)
                 menu.add(0, MENU_CONTEXT_UPDATE, 5,
-                        mGuidisplay.getValue(this.getActivity(), 71));
+                        this.getString(R.string.update));
         }
         if ( state < Pack.STATE_WAIT) {
-            menu.add(0, MENU_CONTEXT_INSTALL, 3, mGuidisplay.getValue(this.getActivity(), 3340));
+            menu.add(0, MENU_CONTEXT_INSTALL, 3, this.getString(R.string.down_install));
             // menu.add(0, MENU_CONTEXT_DELETE, 4, "#delete");
-            menu.add(0, MENU_CONTEXT_RECORD_DELETE, 6, mGuidisplay.getValue(this.getActivity(), 3342));
+            menu.add(0, MENU_CONTEXT_RECORD_DELETE, 6, this.getString(R.string.delete_record));
         }
     }
 

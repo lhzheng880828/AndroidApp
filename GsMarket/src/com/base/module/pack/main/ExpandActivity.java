@@ -9,7 +9,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import com.base.module.language.GuiDisplay;
 import com.base.module.pack.R;
 import com.base.module.pack.common.Log;
 
@@ -28,7 +27,6 @@ public class ExpandActivity  extends FragmentActivity {
     private ExpandActivity.FragmentPagerAdapter fragmentPagerAdapter;
     private ArrayList<Fragment> fragmentArrayList;
     private ViewPager viewpager ;
-    private GuiDisplay mGuidisplay;
     private ActionBar actionBar;
 
     /*@Override
@@ -83,7 +81,6 @@ public class ExpandActivity  extends FragmentActivity {
         super.onCreate(savedInstanceState);    //To change body of overridden methods use File | Settings | File Templates.
         Log.d("OnCreate-----");
         this.setContentView(R.layout.main);
-        mGuidisplay = GuiDisplay.instance();
 
           actionBar = this.getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -117,12 +114,12 @@ public class ExpandActivity  extends FragmentActivity {
         });
 
         ActionBar.Tab tab = actionBar.newTab();
-        tab.setText(mGuidisplay.getValue(this, 28));
+        tab.setText(this.getString(R.string.download));
         tabListener = new TabListener();
         tab.setTabListener(tabListener);
         actionBar.addTab(tab);
         tab = actionBar.newTab();
-        tab.setText(mGuidisplay.getValue(this,3306));
+        tab.setText(this.getString(R.string.installed));
         tab.setTabListener(tabListener);
         actionBar.addTab(tab);
     }

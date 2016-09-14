@@ -72,7 +72,7 @@ public class DownloadAdapter extends BaseAdapter {
         this.mPacks = packs;
         this.mPackNames = packNames;
         mTaskPool = TaskPool.getInstance();
-        cancel_text = mContext.getString(R.string.cancel);//mGuidisplay.getValue(mContext, 3);
+        cancel_text = mContext.getString(R.string.cancel);
         mImageLoader =new ImageLoader(mContext);
         sh = context.getSharedPreferences("com.moudle.base.pack.downloadproess", 0);
         editor = sh.edit();
@@ -227,12 +227,9 @@ public class DownloadAdapter extends BaseAdapter {
             return "";
         if (state == Pack.STATE_UPDATE)
             return mContext.getString(R.string.can_update);
-        // else if (state == Pack.STATE_IN_UPDATE)
-        // return mGuidisplay.getValue(mContext, 3312);
         else if (state == Pack.STATE_ER_UPDATE)
             return mContext.getString(R.string.update_fail);
         else if (state == Pack.STATE_INSTALL)
-            //return mGuidisplay.getValue(mContext, 3306);
             return "";
         else if (state == Pack.STATE_UNINSTALL)
             return mContext.getString(R.string.uninstalled);
