@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/filename"
+    />
+    
+    <EditText
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" 
+	    android:text="oppo.mp4"
+	    android:id="@+id/filename"
+	    />
+	    
+	<LinearLayout
+	    android:orientation="horizontal"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    >
+	    <ImageButton
+	     	android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content" 
+		    android:src="@drawable/play"
+		    android:id="@+id/play"
+		    />
+		 <ImageButton
+	     	android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content" 
+		    android:src="@drawable/pause"
+		    android:id="@+id/pause"
+		    />
+	    <ImageButton
+	     	android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content" 
+		    android:src="@drawable/reset"
+		    android:id="@+id/reset"
+		    />
+		 <ImageButton
+	     	android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content" 
+		    android:src="@drawable/stop"
+		    android:id="@+id/stop"
+		    />
+	</LinearLayout>
+	
+	<SurfaceView
+	 	android:layout_width="fill_parent" 
+	    android:layout_height="240dip" 
+	    android:id="@+id/surfaceView"
+	    />
+</LinearLayout>

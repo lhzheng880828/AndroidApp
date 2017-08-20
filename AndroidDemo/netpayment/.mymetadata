@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="netpayment"
+  id="myeclipse.1279245651156"
+  context-root="/netpayment"
+  j2ee-spec="1.4"
+  archive="netpayment.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

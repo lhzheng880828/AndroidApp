@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, PlayActivity!</string>
+    <string name="app_name">音乐播放器</string>
+    <string name="filename">音乐文件</string>
+    <string name="play">播放</string>
+    <string name="pause">暂停</string>
+    <string name="reset">重播</string>
+    <string name="stop">停止</string>
+    <string name="continue1">继续</string>
+</resources>

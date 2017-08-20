@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+	<TextView  
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" 
+	    android:text="@string/urlpath"
+	    />
+	    
+	<EditText  
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" 
+	    android:text="http://i3.itc.cn/20100707/76c_0969b700_d5b4_41cd_8243_9b486be92cc4_0.jpg"
+	    android:id="@+id/urlpath"
+	    />
+	    
+	<Button
+	 	android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content" 
+	    android:text="@string/button"
+	    android:id="@+id/button"
+	    />
+	    
+	<ImageView
+	 	android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content"
+	    android:id="@+id/imageView"
+	    />    
+</LinearLayout>

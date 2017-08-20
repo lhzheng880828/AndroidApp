@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">短信发送器</string>
+    <string name="mobile">请输入手机号</string>
+    <string name="content">请输入短信内容</string>
+    <string name="button">发送短信</string>
+    <string name="success">短信发送完成</string>
+</resources>

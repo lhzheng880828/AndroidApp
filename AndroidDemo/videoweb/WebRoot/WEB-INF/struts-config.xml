@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="videoForm" type="cn.itcast.formbean.VideoForm"/>
+	</form-beans>
+	<action-mappings>
+		<action path="/video/list" name="videoForm" scope="request" type="cn.itcast.action.VideoListAction">
+			<forward name="video" path="/WEB-INF/page/videos.jsp"/>
+			<forward name="jsonvideo" path="/WEB-INF/page/jsonvideos.jsp"/>
+		</action>
+		<action path="/video/manage" name="videoForm" scope="request" type="cn.itcast.action.VideoManageAction" parameter="method">
+			<forward name="result" path="/WEB-INF/page/result.jsp"/>
+		</action>
+	</action-mappings>
+</struts-config>

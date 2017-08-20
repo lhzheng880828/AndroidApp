@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="itcast"> <!-- 为样式定义一个全局唯一的名字-->
+        <item name="android:textSize">18px</item> <!-- name属性的值为使用了该样式的View控件的属性 -->
+        <item name="android:textColor">#0000CC</item>
+    </style>
+    
+    <style name="itcastTheme">
+    	 <item name="android:textSize">48px</item>
+		<item name="android:windowNoTitle">true</item> 
+		<item name="android:windowFullscreen">?android:windowNoTitle</item> 
+    </style>
+</resources>

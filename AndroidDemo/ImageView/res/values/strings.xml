@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, ImageShowActivity!</string>
+    <string name="app_name">图片浏览器</string>
+    <string name="urlpath">网络图片地址</string>
+    <string name="button">显示</string>
+    <string name="error">网络连接超时</string>
+</resources>

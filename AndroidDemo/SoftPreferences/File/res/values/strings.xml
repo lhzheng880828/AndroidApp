@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">文件操作</string>
+    <string name="filename">文件名称</string>
+    <string name="filecontent">请输入文件的内容</string>
+    <string name="button">保存</string>
+    <string name="success">文件保存成功</string>
+    <string name="error">文件保存失败</string>
+    <string name="sdcarderror">SDCard不存在，或者写保护了</string>
+</resources>
