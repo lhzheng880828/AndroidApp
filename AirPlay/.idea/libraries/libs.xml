@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="libs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/jald.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/netty-all-4.0.18.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/dd-plist.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
