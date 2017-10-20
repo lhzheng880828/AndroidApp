@@ -102,7 +102,7 @@ public class AirPlayServer extends Thread {
 	    }
     }
 	
-	private ChannelFuture startVideoServer(int port, EventLoopGroup bossGroup, EventLoopGroup workerGroup) {
+	private ChannelFuture startVideoServer(int port, EventLoopGroup bossGroup, EventLoopGroup workerGroup) throws InterruptedException {
 		// Netty - Video
 		ServerBootstrap b = new ServerBootstrap();
 		b.group(bossGroup, workerGroup)
@@ -126,11 +126,11 @@ public class AirPlayServer extends Thread {
 		.childOption(ChannelOption.SO_KEEPALIVE, true);
 		
 		// Bind and start to accept incoming connections.
-		ChannelFuture f = b.bind(port);
+		ChannelFuture f = b.bind(port).sync();
 		return f;
 	}
 	
-	private ChannelFuture startMirrorServer(int port, EventLoopGroup bossGroup, EventLoopGroup workerGroup) {
+	private ChannelFuture startMirrorServer(int port, EventLoopGroup bossGroup, EventLoopGroup workerGroup) throws InterruptedException {
 		// Netty - Mirror
 		ServerBootstrap b = new ServerBootstrap();
 		b.group(bossGroup, workerGroup)
@@ -152,7 +152,7 @@ public class AirPlayServer extends Thread {
 		.childOption(ChannelOption.SO_KEEPALIVE, true);
 		
 		// Bind and start to accept incoming connections.
-		ChannelFuture f = b.bind(port);
+		ChannelFuture f = b.bind(port).sync();
 		return f;
 	}
 	

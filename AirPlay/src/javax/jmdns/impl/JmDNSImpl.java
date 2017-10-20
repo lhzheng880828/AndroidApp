@@ -1800,7 +1800,11 @@ public class JmDNSImpl extends JmDNS implements DNSStatefulObject, DNSTaskStarte
         // This protects against recursive calls
         if (this.closeState()) {
             // We got the tie break now clean up
-
+        	try {
+        	    throw new Exception("Call Stack Trace");
+        	} catch (Exception e) {
+        	    Log.i("shyluo@gmail.com", "xxx", e);
+        	}
             // Stop the timer
             Log.d("jmdns", "Canceling the timer");
             this.cancelTimer();

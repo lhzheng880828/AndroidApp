@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
+import android.text.BoringLayout;
+import android.util.Log;
 
 import java.io.IOException;
 import java.net.Inet4Address;
@@ -28,7 +30,7 @@ abstract public class Bonjour {
 	private static final int MSG_START = 0;
 	private static final int MSG_REFRESH = 1;
 	private static final int MSG_STOP = 2;
-	
+	private static final String TAG = Bonjour.class.getSimpleName();
 	abstract protected ServiceInfo onCreateServiceInfo(byte[] hwAddr, String name, int port);
 	
 //	private final List<JmDNS> mListDns = new ArrayList<JmDNS>();
@@ -120,6 +122,7 @@ abstract public class Bonjour {
 						dns= JmDNS.create(addr);
 						dns.registerService(info);
 						mAddr2Dns.put(addr, dns);
+						Log.d(TAG," , interface  is "+ni.getDisplayName()+", address is "+addr);
 					}
 				}
 			}

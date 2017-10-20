@@ -16,18 +16,30 @@ public class AirPlay {
 	public static final String SRCVERS =
 //			"130.14";
 			"150.33";
+//       "220.68"
+	
+	public static final String PKSTR = 
+			"5e66cf9b-0a39-4e0c-9d32-081a8ce63231";
+	
+	public static final String PISTR = 
+			"5e66cf9b-0a39-4e0c-9d32-081a8ce63231";
 	
 	public static final short FEATURES =
 //			0x39f7;
 //			0x77;
 //			0x207D;
+//         features=0xA7FFFF7;
+//If features are given as 0x2beff7, you can go to the next step, fp-setup, without pair-verify
+// 0x527FFFF7  绕过配对验证
+// 0x5A7FFFF7 强制配对			
+			
 			AirPlay.FEATURE_VIDEO | 
 			AirPlay.FEATURE_PHOTO |
 //			AirPlay.FEATURE_VIDEO_FAIR_PLAY |
 			AirPlay.FEATURE_VIDEO_VOLUME_CONTROL |
 			AirPlay.FEATURE_VIDEO_HTTP_LIVE_STREAM |
 			AirPlay.FEATURE_SLIDESHOW |
-//			AirPlay.FEATURE_SCREEN |
+			AirPlay.FEATURE_SCREEN |
 			AirPlay.FEATURE_AUDIO |
 //			AirPlay.FEATURE_FPSAPv2pt5_AES_GCM |
 			AirPlay.FEATURE_PHOTO_CACHING;

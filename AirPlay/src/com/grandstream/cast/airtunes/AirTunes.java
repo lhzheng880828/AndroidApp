@@ -35,4 +35,7 @@ public interface AirTunes {
 	public static final int SAMPLE_RATE = 44100;
 
 	public static final float TOLERANCE_DELAY = 0.05F;
+	
+	public static final String PKSTR = 
+			"373d07e5fc40608f0533fc21daac96e97b6dc59d71e87163e3d8cec6700dce29";
 }

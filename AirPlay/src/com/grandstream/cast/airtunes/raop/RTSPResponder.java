@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.util.Base64;
 import android.util.Log;
 
+import com.grandstream.cast.airtunes.AirTunes;
 import com.grandstream.cast.control.PlaybackControl;
 import com.grandstream.cast.util.FairPlay;
 
@@ -18,6 +19,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 import java.security.PrivateKey;
+import java.sql.SQLClientInfoException;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -264,7 +266,7 @@ public class RTSPResponder extends Thread{
         	if (head.contains("/fp-setup")) {
         		byte[] content = packet.getContent();
         		int seqno = content[6];
-        		if (seqno == 1) {
+        		if (seqno == 3) {
         			response.append("Content-Type", "application/octet-stream");
         			response.append("X-Apple-ET", "32");
         			response.append("Content-Length", "142");
@@ -273,7 +275,7 @@ public class RTSPResponder extends Thread{
         			//payload
         			response.setContent(FairPlay.PACKET2, 0, FairPlay.PACKET2.length);
         			
-        		} else if (seqno == 3) {
+        		} else if (seqno == 4) {
         			response.append("Content-Type", "application/octet-stream");
         			response.append("X-Apple-ET", "32");
         			response.append("Content-Length", "32");
@@ -284,7 +286,92 @@ public class RTSPResponder extends Thread{
         			System.arraycopy(content, content.length - 20, payload, payload.length - 20, 20);
         			response.setContent(payload, 0, payload.length);
         		}
+        		/*RTSP/1.0 200 OK
+        		Date: Thu, 19 Oct 2017 02:16:35 GMT
+        		CSeq: 0
+        		Content-Type: application/octet-stream
+        		Server: AirTunes/220.68
+        		Content-Length: 32
+
+        		8.5...p.*.....A.%.Yn.....w
+        		...$.*/
+        	}else if(head.contains("pair-setup")){
+        		byte[] content = packet.getContent();
+        		int seqno = content[6];
+        		response.append("CSeq", packet.valueOfHeader("CSeq"));
+        		response.append("Content-Type", "application/octet-stream");
+        		response.append("Content-Length", "32");
+        		response.finalizeHeader();
+        		
+        		//payload, 根据client发过来的32位长度的字串根据算法转化成32位发给client
+        		//return pk base 64
+        		byte[] encodePk = Base64.encode(AirTunes.PKSTR.getBytes(), Base64.DEFAULT);
+        		response.setContent(encodePk, 0, encodePk.length);
+        		
+        	}else if(head.contains("pair-verify")){
+        		byte[] content = packet.getContent();
+        		int seqno = content[6];
+        		/*client->server
+        		 * POST /pair-verify RTSP/1.0
+        		X-Apple-PD: 1
+        		X-Apple-AbsoluteTime: 530072180
+        		Content-Length: 68
+        		Content-Type: application/octet-stream
+        		CSeq: 1
+        		DACP-ID: E28CCF9054EDE3B9
+        		Active-Remote: 3016615115
+        		User-Agent: AirPlay/320.20
+
+        		..............k......)oWL..t.%s..(.b1t<..*....i1"m,.. g.|h.Y...t..M.
+        		server-client
+        		
+        		RTSP/1.0 200 OK
+        		Date: Thu, 19 Oct 2017 02:16:36 GMT
+        		CSeq: 1
+        		Content-Type: application/octet-stream
+        		Server: AirTunes/220.68
+        		Content-Length: 96
+
+        		.^{ ...O. j..Xa+..y....+.^.!...p...nF.!.g*.W..... .U...L...b[bz.tf.........sm..".....,A.=....g..
+*/        		if (seqno == 1) {
+	response.append("CSeq", packet.valueOfHeader("CSeq"));
+	response.append("Content-Type", "application/octet-stream");
+	response.append("Content-Length", "96");
+	response.finalizeHeader();
+	
+	//payload,根据请求数据返回的结果
+	
+	
+	/*client->server
+	 * POST /pair-verify RTSP/1.0
+	X-Apple-PD: 1
+	X-Apple-AbsoluteTime: 530072180
+	Content-Length: 68
+	Content-Type: application/octet-stream
+	CSeq: 2
+	DACP-ID: E28CCF9054EDE3B9
+	Active-Remote: 3016615115
+	User-Agent: AirPlay/320.20
+
+	......H.u6.Fq`.(V?..+6.4.7...^..&.....K.L.............T1Wv7I.*ke.m..
+	
+	server->client
+	RTSP/1.0 200 OK
+	Date: Thu, 19 Oct 2017 02:16:36 GMT
+	CSeq: 2
+	Content-Type: application/octet-stream
+	Server: AirTunes/220.68
+	Content-Length: 0*/
+        		}else if(seqno==2){
+        			response.append("CSeq", packet.valueOfHeader("CSeq"));
+        			response.append("Content-Type", "application/octet-stream");
+        			response.append("Content-Length", "96");
+        			response.finalizeHeader();
+        			
+        			//payload, 没有数据返回
+        		}
         	}
+        	
         } else {
         	Log.d("ShairPort", "REQUEST(" + REQ + "): Not Supported Yet!");
         	Log.d("ShairPort", packet.getRawPacket());
