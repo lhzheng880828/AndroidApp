@@ -5,5 +5,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="libs/netty-all-4.0.18.Final.jar" sourcepath="/home/linhu/code/MyAppCode/airPlay/netty/transport/src/main/java"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

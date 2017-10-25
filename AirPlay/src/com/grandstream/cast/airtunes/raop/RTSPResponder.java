@@ -1,9 +1,18 @@
 package com.grandstream.cast.airtunes.raop;
 
 import android.net.Uri;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 
+import com.dd.plist.BinaryPropertyListParser;
+import com.dd.plist.NSArray;
+import com.dd.plist.NSData;
+import com.dd.plist.NSDictionary;
+import com.dd.plist.NSNumber;
+import com.dd.plist.NSObject;
+import com.dd.plist.PropertyListFormatException;
+import com.grandstream.cast.airplay.AirPlay;
 import com.grandstream.cast.airtunes.AirTunes;
 import com.grandstream.cast.control.PlaybackControl;
 import com.grandstream.cast.util.FairPlay;
@@ -34,6 +43,9 @@ import javax.crypto.Cipher;
  * @author bencall
  */
 public class RTSPResponder extends Thread{
+	
+	
+	private static final String TAG = RTSPResponder.class.getSimpleName();
 	
 	private static final byte[] CRLFCRLF = {
 	        '\r', '\n', '\r', '\n'
@@ -108,6 +120,7 @@ public class RTSPResponder extends Thread{
     	
 		// Paquet request
 		String REQ = packet.getReq();
+		Log.d(TAG, " REQ is "+REQ);
         if(REQ.contentEquals("OPTIONS")){
         	response.append("Audio-Jack-Status", "connected; type=analog");
     		response.append("CSeq", packet.valueOfHeader("CSeq"));
@@ -127,39 +140,42 @@ public class RTSPResponder extends Thread{
         	
         	response.append("Audio-Jack-Status", "connected; type=analog");
     		response.append("CSeq", packet.valueOfHeader("CSeq"));
+    		
         	
     		try {
 	        	int controlPort = 0;
 	        	int timingPort = 0;
 	        	InetAddress iaddr = null;
 	        	
-	        	String value = packet.valueOfHeader("Transport");        	
-	        	
-	        	// Control port
-	        	Pattern p = Pattern.compile(";control_port=(\\d+)");
-	        	Matcher m = p.matcher(value);
-	        	if(m.find()){
-	        		controlPort =  Integer.valueOf(m.group(1));
-	        	}
-	        	
-	        	// Timing port
-	        	p = Pattern.compile(";timing_port=(\\d+)");
-	        	m = p.matcher(value);
-	        	if(m.find()){
-	        		timingPort =  Integer.valueOf(m.group(1));
-	        	}
-	        	
-	        	// Address
-	        	p = Pattern.compile("SETUP\\s(rtsp://.*?)\\s");
-	        	m = p.matcher(packet.getRawPacket());
-	        	if (m.find() && mAudioSession != null) {
-	        		String uri = m.group(1);
-	        		iaddr = InetAddress.getByName(Uri.parse(uri).getHost());
-	        		
-	        		// Creaet Audio Server
-	        		mAudioServer = AudioServer.create(mAudioSession, iaddr, controlPort, timingPort);
-	        	}
-            
+		        	String value = packet.valueOfHeader("Transport");        	
+		        	// Control port
+		        	Pattern p = Pattern.compile(";control_port=(\\d+)");
+		        	if(!TextUtils.isEmpty(value)){
+		        		Matcher m = p.matcher(value);
+			        	if(m.find()){
+			        		controlPort =  Integer.valueOf(m.group(1));
+			        	}
+			        	// Timing port
+			        	p = Pattern.compile(";timing_port=(\\d+)");
+			        	
+			        	m = p.matcher(value);
+			        	if(m.find()){
+			        		timingPort =  Integer.valueOf(m.group(1));
+			        	}
+			        
+		        	}
+		        	
+		        	// Address
+		        	p = Pattern.compile("SETUP\\s(rtsp://.*?)\\s");
+		        	Matcher m = p.matcher(packet.getRawPacket());
+		        	if ( m.find() && mAudioSession != null) {
+		        		String uri = m.group(1);
+		        		Log.d(TAG, "[SETUP] uri is "+uri +", timingPort is "+timingPort+", controlPort is "+controlPort);
+		        		iaddr = InetAddress.getByName(Uri.parse(uri).getHost());
+		        		// Creaet Audio Server
+		        		mAudioServer = AudioServer.create(mAudioSession, iaddr, controlPort, timingPort);
+		        	}
+		     
             } catch (SocketException e) {
 	            e.printStackTrace();
             } catch (UnknownHostException e) {
@@ -167,7 +183,6 @@ public class RTSPResponder extends Thread{
             } catch (Exception e) {
 	            e.printStackTrace();
             }
-    		
     		if (mAudioServer != null) {
 	            String transport = String.format(Locale.US, "RTP/AVP/UDP;unicast;mode=record;server_port=%d;control_port=%d;timing_port=%d",
 	            		mAudioServer.getServerPort(), mAudioServer.getControlPort(), mAudioServer.getTimingPort());
@@ -177,10 +192,132 @@ public class RTSPResponder extends Thread{
     		} else {
     			// TODO: response not okay
     		}
+    		
+    		
+    		
+    		
+    		
+    		//{for Mirror SETUP message}
+         // parse setup request
+        	/*SETUP rtsp://192.168.123.47/6108990559123033009 RTSP/1.0
+        		Content-Length: 425
+        		Content-Type: application/x-apple-binary-plist
+        		CSeq: 5
+        		DACP-ID: E28CCF9054EDE3B9
+        		Active-Remote: 3016615115
+        		User-Agent: AirPlay/320.20
+
+        		bplist00..........
+        		..
+        		.........RetTname]sourceVersionZtimingPortXdeviceIDUmodelZmacAddress^osBuildVersion[sessionUUIDTekeySeiv. _..GrandStream-6plusV320.20..&_..D8:BB:2C:1F:28:94YiPhone7,1_..D8:BB:2C:1F:28:92U14G60_.$54C77E8B-F4BE-4BB1-A9D7-D246D6672D8BO.HFPLY.......<....?z\.(...K`.....}.....'......W...B...6j..w.{^..d...,...!.O..Ds*..i#6...D.T.!.....".'.5.@.I.O.Z.i.u.z.~...................H...............................[
+        	*/
         	
+        	/*request string like this
+        	 * <plist version="1.0">
+            <dict>
+            	<key>et</key>
+            	<integer>32</integer>
+            	<key>name</key>
+            	<string>GrandStream-6plus</string>
+            	<key>sourceVersion</key>
+            	<string>320.20</string>
+            	<key>timingPort</key>
+            	<integer>57330</integer>
+            	<key>deviceID</key>
+            	<string>D8:BB:2C:1F:28:94</string>
+            	<key>model</key>
+            	<string>iPhone7,1</string>
+            	<key>macAddress</key>
+            	<string>D8:BB:2C:1F:28:92</string>
+            	<key>osBuildVersion</key>
+            	<string>14G60</string>
+            	<key>sessionUUID</key>
+            	<string>8708F9F2-CF6F-47B6-9F30-AB8006A531A1</string>
+            	<key>ekey</key>
+            	<data>
+            		RlBMWQECAQAAAAA8AAAAANHJ7v4IfkSnCYtn6odFJ/cAAAAQl1HFACyv3A6IYceOU0T+lX1WsxyxG71s3Sdxwa4k+SJaqs5R
+            	</data>
+            	<key>eiv</key>
+            	<data>
+            		i2XW7d2LuYAbCJ2ub4qS/g==
+            	</data>
+            </dict>
+            </plist>*/
+        	
+        	String contentType = packet.valueOfHeader("Content-Type");
+        	Log.d(TAG,"[SETUP], content type is "+contentType);
+	        if(contentType.equals("application/x-apple-binary-plist")){
+	        	try {
+					NSDictionary dict = (NSDictionary) BinaryPropertyListParser.parse(packet.getContent());
+					Log.d(TAG,"[SETUP], dict  is "+dict.toXMLPropertyList());
+					//process ekey && eiv
+					NSData ekey =  (NSData)dict.get("ekey");
+					NSData eiv = (NSData) dict.get("eiv");
+					mAudioSession = AudioSession.parse(ekey.toString(), eiv.toString(), mKey);
+					
+					NSNumber timingportObj = (NSNumber)dict.get("timingPort");
+					Log.d(TAG,"[SETUP], timingportObj  is "+timingportObj.toString());
+						if(timingportObj != null){
+						int  timingPort =timingportObj.intValue();
+						
+						//timingPort = Integer.valueOf(timingPortStr);
+						//response should like below
+						/*RTSP/1.0 200 OK
+						Date: Thu, 19 Oct 2017 02:16:37 GMT
+						CSeq: 5
+						Server: AirTunes/220.68
+						Content-Length: 284
+	
+						<?xml version="1.0" encoding="UTF-8"?>
+						<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+						<plist version="1.0">
+						<dict>
+						.<key>eventPort</key>
+						.<integer>12854</integer>
+						.<key>timingPort</key>
+						.<integer>22897</integer>
+						</dict>
+						</plist>*/
+							if(mAudioServer != null ){
+								NSDictionary reponsedict = new NSDictionary();
+								Log.d(TAG,"local event Port is "+mAudioServer.getControlPort()+
+										",  time port is "+mAudioServer.getTimingPort());
+					        	reponsedict.put("eventPort",  mAudioServer.getControlPort());
+					        	reponsedict.put("timingPort", mAudioServer.getTimingPort());
+					        	Log.d(TAG,"[SETUP]response content is "+reponsedict.toXMLPropertyList());
+								byte[] contents = reponsedict.toXMLPropertyList().getBytes();
+								response.append("Content-Length", contents.length+"");
+					        	response.setContent(contents, 0, contents.length);
+							}
+						}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (PropertyListFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+	        }
+    	
         } else if (REQ.contentEquals("RECORD")){
-        	response.append("Audio-Jack-Status", "connected; type=analog");
+        	/*session like below
+        	 * RECORD rtsp://192.168.123.47/6108990559123033009 RTSP/1.0
+        		CSeq: 8
+        		DACP-ID: E28CCF9054EDE3B9
+        		Active-Remote: 3016615115
+        		User-Agent: AirPlay/320.20
+
+        		RTSP/1.0 200 OK
+        		Date: Thu, 19 Oct 2017 02:16:37 GMT
+        		CSeq: 8
+        		Session: DEADBEEF
+        		Audio-Jack-Status: connected; type=digital
+        		Server: AirTunes/220.68
+        		Content-Length: 0*/
+        	response.append("Session", "DEADBEEF");
+        	response.append("Audio-Jack-Status", "connected; type=digital");
     		response.append("CSeq", packet.valueOfHeader("CSeq"));
+    		response.append("Content-Length", "0");
         	
     		if (mAudioServer != null) {
     			PlaybackControl.getInstance().startAudioSession(this);
@@ -224,12 +361,12 @@ public class RTSPResponder extends Thread{
         	response.append("Connection", "close");
         	
         } else if (REQ.contentEquals("SET_PARAMETER")){
-        	response.append("Audio-Jack-Status", "connected; type=analog");
+        	//response.append("Audio-Jack-Status", "connected; type=analog");
     		response.append("CSeq", packet.valueOfHeader("CSeq"));
         	
         	// Timing port
-        	String contentType = packet.valueOfHeader("Content-Type");
-        	if ("text/parameters".equals(contentType)) {
+        	String contentOfType = packet.valueOfHeader("Content-Type");
+        	if ("text/parameters".equals(contentOfType)) {
         		String content = packet.getContentString();
         		// Volume control
         		Pattern p = Pattern.compile("volume:\\s?(.+)");
@@ -250,12 +387,12 @@ public class RTSPResponder extends Thread{
         		}
         		
         	// Cover Art
-        	} else if ("image/jpeg".equals(contentType)) {
+        	} else if ("image/jpeg".equals(contentOfType)) {
         		long rtpTime = 0;
         		PlaybackControl.getInstance().updateCoverArt(rtpTime, packet.getContent(), 0, packet.getContentLength());
         		
         	// Track info
-        	} else if ("application/x-dmap-tagged".equals(contentType)) {
+        	} else if ("application/x-dmap-tagged".equals(contentOfType)) {
         		long rtpTime = 0;
         		String str = packet.getContentString();
         		PlaybackControl.getInstance().updateTrackInfo(rtpTime, packet.getContent(), 0, packet.getContentLength());
@@ -266,7 +403,10 @@ public class RTSPResponder extends Thread{
         	if (head.contains("/fp-setup")) {
         		byte[] content = packet.getContent();
         		int seqno = content[6];
-        		if (seqno == 3) {
+        		String cseq = packet.valueOfHeader("CSeq");
+        		Log.d("ShairPort", "header cq is "+cseq);
+        		//Log.d("ShairPort","contenter seqno is "+seqno);
+        		if (cseq.equals("0")) {
         			response.append("Content-Type", "application/octet-stream");
         			response.append("X-Apple-ET", "32");
         			response.append("Content-Length", "142");
@@ -275,7 +415,7 @@ public class RTSPResponder extends Thread{
         			//payload
         			response.setContent(FairPlay.PACKET2, 0, FairPlay.PACKET2.length);
         			
-        		} else if (seqno == 4) {
+        		} else if (cseq.equals("1")) {
         			response.append("Content-Type", "application/octet-stream");
         			response.append("X-Apple-ET", "32");
         			response.append("Content-Length", "32");
@@ -371,6 +511,156 @@ public class RTSPResponder extends Thread{
         			//payload, 没有数据返回
         		}
         	}
+        	
+        } else if(REQ.contentEquals("GET")){
+        	/*request like this
+        	 * GET /info RTSP/1.0
+        	X-Apple-ProtocolVersion: 0
+        	CSeq: 6
+        	DACP-ID: E28CCF9054EDE3B9
+        	Active-Remote: 3016615115
+        	User-Agent: AirPlay/320.20*/
+        	
+        	String directry = packet.getDirectory();
+        	Log.d(TAG,"directry is "+directry);
+        	/*response like this
+        	 * RTSP/1.0 200 OK
+        	Date: Thu, 19 Oct 2017 02:16:37 GMT
+        	Session: DEADBEEF
+        	CSeq: 6
+        	Audio-Jack-Status: connected; type=digital
+        	Server: AirTunes/220.68
+        	Content-Length: 2230
+
+        	<?xml version="1.0" encoding="UTF-8"?>
+        	<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+        	<plist version="1.0">
+        	<dict>
+        	.<key>audioFormats</key>
+        	.<array>
+        	..<dict>
+        	...<key>audioInputFormats</key>
+        	...<integer>67108860</integer>
+        	...<key>audioOutputFormats</key>
+        	...<integer>67108860</integer>
+        	...<key>type</key>
+        	...<integer>100</integer>
+        	..</dict>*/
+        	if(directry.equals("info")){
+        		Log.d(TAG," [GET], directry is "+directry);
+        	}
+        	response.append("Session", "DEADBEEF");
+        	response.append("CSeq", packet.valueOfHeader("CSeq"));
+        	response.append("Audio-Jack-Status","connected; type=digital");
+        	
+        	NSDictionary responseDic = new NSDictionary();
+        	
+        	//audioFormats
+        	NSDictionary audioFormat1 = new NSDictionary();
+        	audioFormat1.put("audioInputFormats", 67108860);
+        	audioFormat1.put("audioOutputFormats", 67108860);
+        	audioFormat1.put("type", 100);
+        	NSDictionary audioFormat2 = new NSDictionary();
+        	audioFormat2.put("audioInputFormats", 67108860);
+        	audioFormat2.put("audioOutputFormats", 67108860);
+        	audioFormat2.put("type", 101);
+        	responseDic.put("audioFormats", NSArray.wrap(new NSObject[]{audioFormat1,audioFormat2}));
+        	
+        	//audioLatencies
+        	NSDictionary audioLatencies1 = new NSDictionary();
+        	audioLatencies1.put("audioType", "default");
+        	audioLatencies1.put("inputLatencyMicros", false);
+        	audioLatencies1.put("type", 100);
+        	NSDictionary audioLatencies2 = new NSDictionary();
+        	audioLatencies2.put("audioType", "default");
+        	audioLatencies2.put("inputLatencyMicros", false);
+        	audioLatencies2.put("type", 101);
+        	responseDic.put("audioLatencies", NSArray.wrap(new NSObject[]{audioLatencies1,audioLatencies2}));
+        	
+        	//deviceID
+        	responseDic.put("deviceID", "000B828B571E");//ugle
+        	
+        	//displays
+        	NSDictionary displayFeature = new NSDictionary();
+        	displayFeature.put("features", 14);
+        	displayFeature.put("height", 720);
+        	displayFeature.put("heightPhysical", false);
+        	displayFeature.put("heightPixels", 720);
+        	displayFeature.put("overscanned", false);
+        	displayFeature.put("refreshRate", 60);
+        	displayFeature.put("rotation", true);
+        	displayFeature.put("uuid", "e5f7a68d-7b0f-4305-984b-974f677a150b");
+        	displayFeature.put("width", 1280);
+        	displayFeature.put("widthPhysical", false);
+        	displayFeature.put("widthPixels", 1280);
+        	responseDic.put("displays", NSArray.wrap(new NSObject[]{displayFeature}));
+        	
+        	//features
+        	NSDictionary feature = new NSDictionary();
+        	feature.put("features", AirPlay.FEATURES);
+        	
+        	//keepAliveLowPower
+        	NSDictionary keepAliveLowPower = new NSDictionary();
+        	keepAliveLowPower.put("keepAliveLowPower", 1);
+        	
+        	//keepAliveLowPower
+        	NSDictionary keepAliveSendStatsAsBody = new NSDictionary();
+        	keepAliveSendStatsAsBody.put("keepAliveSendStatsAsBody", 1);
+        	
+        	//macAddress
+        	NSDictionary macAddress = new NSDictionary();
+        	macAddress.put("macAddress", "000B828B571E");
+        	
+        	
+        	//model
+        	NSDictionary model = new NSDictionary();
+        	model.put("model", "AppleTV3,2");
+        	
+        	//name
+        	NSDictionary name = new NSDictionary();
+        	name.put("name", "Apple TV");
+        	
+        	//pi
+        	NSDictionary pi = new NSDictionary();
+        	pi.put("pi", "b08f5a79-db29-4384-b456-a4784d9e6055");
+        	
+        	//pk
+        	NSDictionary pk = new NSDictionary();
+        	pk.put("pk", "373d07e5fc40608f0533fc21daac96e97b6dc59d71e87163e3d8cec6700dce29");
+        	
+        	//sourceVersion
+        	NSDictionary sourceVersion = new NSDictionary();
+        	sourceVersion.put("sourceVersion", AirPlay.SRCVERS);
+        	
+        	//statusFlags
+        	NSDictionary statusFlags = new NSDictionary();
+        	statusFlags.put("statusFlags", 68);
+        	
+        	//statusFlags
+        	NSDictionary vv = new NSDictionary();
+        	vv.put("vv", 2);
+        	
+        	Log.d(TAG, "[GET/info], response string  is "+responseDic.toXMLPropertyList());
+        	byte[] contents = responseDic.toXMLPropertyList().getBytes();
+        	response.setContent(contents, 0, contents.length);
+        } else if(REQ.contentEquals("GET_PARAMETER")){
+        String requestStr =	packet.getContentString();
+        if(requestStr.contains("volume")){
+        	/*RTSP/1.0 200 OK
+        	Date: Thu, 19 Oct 2017 02:16:37 GMT
+        	CSeq: 7
+        	Audio-Jack-Status: connected; type=digital
+        	Server: AirTunes/220.68
+        	volume: 1.000000
+        	Content-Length: 18
+
+        	volume: 1.000000*/
+        	response.append("CSeq", packet.valueOfHeader("CSeq"));
+        	response.append("Audio-Jack-Status", "connected; type=digital");
+        	response.append("volume", "1.000000");
+        	byte[] respContent = "volume: 1.000000".getBytes();
+        	response.setContent(respContent, 0, respContent.length);
+        }
         	
         } else {
         	Log.d("ShairPort", "REQUEST(" + REQ + "): Not Supported Yet!");

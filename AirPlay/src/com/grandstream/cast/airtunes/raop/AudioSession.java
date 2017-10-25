@@ -72,6 +72,24 @@ public abstract class AudioSession {
 	    return session;
     }
 	
+	public static AudioSession parse(String ekey, String eiv, PrivateKey privateKey) {
+		AudioSession session = null;
+		byte[] aesiv = null;
+		byte[] aeskey = null;
+		byte[] rsaaes = Base64.decode(ekey,  Base64.DEFAULT);
+		aeskey = decryptRsa(rsaaes, privateKey);
+		
+		aesiv = Base64.decode(eiv, Base64.DEFAULT);
+		//96 352 0 16 40 10 14 2 255 0 0 44100
+		Map<String, String> attr = new HashMap<String, String>();
+		attr.put("fmtp", "96 352 0 16 40 10 14 2 255 0 0 44100");
+		session = AudioSessionAlac.parse(aeskey, aesiv, attr);
+		return session;
+	}
+	
+	
+	
+	
 	/**
 	 * Decrypt with RSA priv key
 	 * @param array

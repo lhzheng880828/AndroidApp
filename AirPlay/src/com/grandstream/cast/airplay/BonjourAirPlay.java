@@ -22,11 +22,11 @@ public class BonjourAirPlay extends Bonjour {
 		txt.put("features", String.format("0x%04x", AirPlay.FEATURES));
 		txt.put("model", AirPlay.MODEL);
 		txt.put("srcvers", AirPlay.SRCVERS);
-		txt.put("vv", "1");
+		txt.put("vv", "2");
 		//txt.put("rhd", "1.9.7");
-		//txt.put("flags", "0x44");
-		//txt.put("pi", AirPlay.PISTR);
-		//txt.put("pk", AirPlay.PKSTR);
+		txt.put("flags", "0x44");
+		txt.put("pi", AirPlay.PISTR);
+		txt.put("pk", AirPlay.PKSTR);
 		return ServiceInfo.create(AirPlay.TYPE, name, port, 0, 0, txt);
 	}
 

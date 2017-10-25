@@ -198,6 +198,12 @@ public class AirPlayServer extends Thread {
 	
 	public void close() {
 		// TODO: close server
+		try {
+			this.interrupt();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

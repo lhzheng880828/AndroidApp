@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.grandstream.cast.airplay.AirPlayServer;
 import com.grandstream.cast.airtunes.AirTunesServer;
@@ -66,6 +67,7 @@ public class AirService extends Service {
 	@Override
     public void onCreate() {
 	    super.onCreate();
+	    Log.d(TAG, "onCreate AirService");
 	    sInstance = this;
 	    
 	    // init key
@@ -116,12 +118,14 @@ public class AirService extends Service {
 
 	@Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+		 Log.d(TAG, "onStartCommand AirService");
 	    return START_STICKY;
     }
 
 	@Override
     public void onDestroy() {
 	    super.onDestroy();
+	    Log.d(TAG, "onDestroy AirService");
 	    if (mAirTunes != null) {
 	    	mAirTunes.close();
 	    }

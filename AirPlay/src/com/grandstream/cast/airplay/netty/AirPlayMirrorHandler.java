@@ -26,7 +26,7 @@ public class AirPlayMirrorHandler extends BaseAirPlayHandler {
 	
 	@Override
     public void channelHttpRequest(ChannelHandlerContext ctx, FullHttpRequest request) throws Exception {
-			
+		Log.d(TAG, "[channelHttpRequest] request:" + request.toString());
 		String uri = request.getUri();
 		if (uri.equals("/stream.xml")) {
 			NSDictionary plist = new NSDictionary();
@@ -50,7 +50,7 @@ public class AirPlayMirrorHandler extends BaseAirPlayHandler {
 			
 			/*
 			 * deviceID	integer	181221086727016	MAC address (A4:D1:D2:80:0B:68)
-			 * sessionID	integer	�V808788724	session ID (0xcfcadd0c)
+			 * sessionID	integer	V808788724	session ID (0xcfcadd0c)
 			 * version	string	130.16	server version
 			 * param1	data	(72 bytes)	AES key, encrypted with FairPlay
 			 * param2	data	(16 bytes)	AES initialization vector
