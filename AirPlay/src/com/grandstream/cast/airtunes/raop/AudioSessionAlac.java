@@ -111,8 +111,8 @@ public class AudioSessionAlac extends AudioSession {
 			return;
 		}
 		
-		Alac.createAlac(sampleSize, 2);
-		Alac.setupAlac(getFramePerPacket(), _7a, getSampleSize(), rice_historymult, rice_initialhistory, rice_kmodifier, _7f, _80, _82, _86, _8a_rate);
+		//Alac.createAlac(sampleSize, 2);
+		//Alac.setupAlac(getFramePerPacket(), _7a, getSampleSize(), rice_historymult, rice_initialhistory, rice_kmodifier, _7f, _80, _82, _86, _8a_rate);
 
 		alac = AlacDecodeUtils.create_alac(this.getSampleSize(), 2);
 		if (alac == null){
@@ -151,9 +151,11 @@ public class AudioSessionAlac extends AudioSession {
 			for (int i = length - fragment; i < length; i++) {
 				packetBuffer[i] = data[i + offset];
 			}
-			outputsize = Alac.decodeByteFrame(packetBuffer, length, outbuffer);
+			//outputsize = Alac.decodeByteFrame(packetBuffer, length, outbuffer);
+			outputsize = AlacDecodeUtils.decode_frame(alac, packetBuffer, new int[4096], length);
 		} else {
-			outputsize = Alac.decodeByteFrame(data, length, outbuffer);
+			//outputsize = Alac.decodeByteFrame(data, length, outbuffer);
+			outputsize = AlacDecodeUtils.decode_frame(alac, data, new int[4096], length);
 		}
 		assert outputsize == getFramePerPacket() * 4; // FRAME_BYTES length
 

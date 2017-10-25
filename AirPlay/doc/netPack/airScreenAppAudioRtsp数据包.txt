@@ -1,0 +1,978 @@
+pair-setup 与 pair-verify阶段如何解密
+sign the server curve public key + client curve public key with the EdDSA private key and decrypt it with the derived AES key from the shared secret composed from the server curve private key and the client curve public key.
+
+roap流程
+POST /pair-setup RTSP/1.0
+Content-Length: 32
+Content-Type: application/octet-stream
+CSeq: 0
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+1t<..*....i1"m,.. g.|h.Y...t..M.RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:35 GMT
+CSeq: 0
+Content-Type: application/octet-stream
+Server: AirTunes/220.68
+Content-Length: 32
+
+8.5...p.*.....A.%.Yn.....w
+...$.POST /pair-verify RTSP/1.0
+X-Apple-PD: 1
+X-Apple-AbsoluteTime: 530072180
+Content-Length: 68
+Content-Type: application/octet-stream
+CSeq: 1
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+..............k......)oWL..t.%s..(.b1t<..*....i1"m,.. g.|h.Y...t..M.RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:36 GMT
+CSeq: 1
+Content-Type: application/octet-stream
+Server: AirTunes/220.68
+Content-Length: 96
+
+.^{ ...O. j..Xa+..y....+.^.!...p...nF.!.g*.W..... .U...L...b[bz.tf.........sm..".....,A.=....g..POST /pair-verify RTSP/1.0
+X-Apple-PD: 1
+X-Apple-AbsoluteTime: 530072180
+Content-Length: 68
+Content-Type: application/octet-stream
+CSeq: 2
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+......H.u6.Fq`.(V?..+6.4.7...^..&.....K.L.............T1Wv7I.*ke.m..RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:36 GMT
+CSeq: 2
+Content-Type: application/octet-stream
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /fp-setup RTSP/1.0
+X-Apple-ET: 32
+Content-Length: 16
+Content-Type: application/octet-stream
+CSeq: 3
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+FPLY............RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:36 GMT
+CSeq: 3
+Content-Type: application/octet-stream
+X-Apple-ET: 32
+Server: AirTunes/220.68
+Content-Length: 142
+
+FPLY...........2.W..RO...z.d.{.D$...~.
+.z..]..'0.Y....:.M.......M...\{V....\...C....e.N.9.[..d..]..>.j.~.V.+..@Bu.ZD.Y.rV...Q8...'r..W.P.*.Fh.POST /fp-setup RTSP/1.0
+X-Apple-ET: 32
+Content-Length: 164
+Content-Type: application/octet-stream
+CSeq: 4
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+FPLY.............p..gO.;......%jXB.....*.....T....x....#.E.^.]|.....s....
+j..........q..pT....y.Gq<..r.
+.+..ZW.._..Z......H...>...k'..k..4...M;r..XU.vc...z,.\....O.RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:36 GMT
+CSeq: 4
+Content-Type: application/octet-stream
+X-Apple-ET: 32
+Server: AirTunes/220.68
+Content-Length: 32
+
+FPLY..........XU.vc...z,.\....O. SETUP rtsp://192.168.123.47/6108990559123033009 RTSP/1.0
+Content-Length: 425
+Content-Type: application/x-apple-binary-plist
+CSeq: 5
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+bplist00..........
+..
+.........RetTname]sourceVersionZtimingPortXdeviceIDUmodelZmacAddress^osBuildVersion[sessionUUIDTekeySeiv. _..GrandStream-6plusV320.20..&_..D8:BB:2C:1F:28:94YiPhone7,1_..D8:BB:2C:1F:28:92U14G60_.$54C77E8B-F4BE-4BB1-A9D7-D246D6672D8BO.HFPLY.......<....?z\.(...K`.....}.....'......W...B...6j..w.{^..d...,...!.O..Ds*..i#6...D.T.!.....".'.5.@.I.O.Z.i.u.z.~...................H...............................[   RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:37 GMT
+CSeq: 5
+Server: AirTunes/220.68
+Content-Length: 284
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+.<key>eventPort</key>
+.<integer>12854</integer>
+.<key>timingPort</key>
+.<integer>22897</integer>
+</dict>
+</plist>  
+
+GET /info RTSP/1.0
+X-Apple-ProtocolVersion: 0
+CSeq: 6
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:37 GMT
+Session: DEADBEEF
+CSeq: 6
+Audio-Jack-Status: connected; type=digital
+Server: AirTunes/220.68
+Content-Length: 2230
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+.<key>audioFormats</key>
+.<array>
+..<dict>
+...<key>audioInputFormats</key>
+...<integer>67108860</integer>
+...<key>audioOutputFormats</key>
+...<integer>67108860</integer>
+...<key>type</key>
+...<integer>100</integer>
+..</dict>
+..<dict>
+...<key>audioInputFormats</key>
+...<integer>67108860</integer>
+...<key>audioOutputFormats</key>
+...<integer>67108860</integer>
+...<key>type</key>
+...<integer>101</integer>
+..</dict>
+.</array>
+.<key>audioLatencies</key>
+.<array>
+..<dict>
+...<key>audioType</key>
+...<string>default</string>
+...<key>inputLatencyMicros</key>
+...<false/>
+...<key>type</key>
+...<integer>100</integer>
+..</dict>
+..<dict>
+...<key>audioType</key>
+...<string>default</string>
+...<key>inputLatencyMicros</key>
+...<false/>
+...<key>type</key>
+...<integer>101</integer>
+..</dict>
+.</array>
+.<key>deviceID</key>
+.<string>000B828B571E</string>
+.<key>displays</key>
+.<array>
+..<dict>
+...<key>features</key>
+...<integer>14</integer>
+...<key>height</key>
+...<integer>720</integer>
+...<key>heightPhysical</key>
+...<false/>
+...<key>heightPixels</key>
+...<integer>720</integer>
+...<key>overscanned</key>
+...<false/>
+...<key>refreshRate</key>
+...<integer>60</integer>
+...<key>rotation</key>
+...<true/>
+...<key>uuid</key>
+...<string>e5f7a68d-7b0f-4305-984b-974f677a150b</string>
+...<key>width</key>
+...<integer>1280</integer>
+...<key>widthPhysical</key>
+...<false/>
+...<key>widthPixels</key>
+...<integer>1280</integer>
+..</dict>
+.</array>
+.<key>features</key>
+.<integer>176160759</integer>
+.<key>keepAliveLowPower</key>
+.<integer>1</integer>
+.<key>keepAliveSendStatsAsBody</key>
+.<integer>1</integer>
+.<key>macAddress</key>
+.<string>000B828B571E</string>
+.<key>model</key>
+.<string>AppleTV3,2</string>
+.<key>name</key>
+.<string>Apple TV</string>
+.<key>pi</key>
+.<string>b08f5a79-db29-4384-b456-a4784d9e6055</string>
+.<key>pk</key>
+.<string>373d07e5fc40608f0533fc21daac96e97b6dc59d71e87163e3d8cec6700dce29</string>
+.<key>sourceVersion</key>
+.<string>220.68</string>
+.<key>statusFlags</key>
+.<integer>68</integer>
+.<key>vv</key>
+.<integer>2</integer>
+</dict>
+</plist>
+
+GET_PARAMETER rtsp://192.168.123.47/6108990559123033009 RTSP/1.0
+Content-Length: 8
+Content-Type: text/parameters
+CSeq: 7
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+volume
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:37 GMT
+CSeq: 7
+Audio-Jack-Status: connected; type=digital
+Server: AirTunes/220.68
+volume: 1.000000
+Content-Length: 18
+
+volume: 1.000000
+RECORD rtsp://192.168.123.47/6108990559123033009 RTSP/1.0
+CSeq: 8
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:37 GMT
+CSeq: 8
+Session: DEADBEEF
+Audio-Jack-Status: connected; type=digital
+Server: AirTunes/220.68
+Content-Length: 0
+
+SET_PARAMETER rtsp://192.168.123.47/6108990559123033009 RTSP/1.0
+Content-Length: 20
+Content-Type: text/parameters
+CSeq: 9
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+volume: -20.000000
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:37 GMT
+CSeq: 9
+Server: AirTunes/220.68
+Content-Length: 0
+
+SETUP rtsp://192.168.123.47/6108990559123033009 RTSP/1.0
+Content-Length: 188
+Content-Type: application/x-apple-binary-plist
+CSeq: 10
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+bplist00...Wstreams.........Ttype]timestampInfo_..streamConnectionID.n.......
+.TnameUSubSu.
+
+UBePxT.
+.UAfPxT.
+.UBefEn.
+.UEmEnc.?..Ir.O......!/DFLOTZ]cfloux~................................RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:37 GMT
+CSeq: 10
+Server: AirTunes/220.68
+Content-Length: 340
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+.<key>streams</key>
+.<array>
+..<dict>
+...<key>dataPort</key>
+...<integer>7100</integer>
+...<key>type</key>
+...<integer>110</integer>
+..</dict>
+.</array>
+</dict>
+</plist>SET_PARAMETER rtsp://192.168.123.47/6108990559123033009 RTSP/1.0
+Content-Length: 18
+Content-Type: text/parameters
+CSeq: 11
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+volume: 1.000000
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:37 GMT
+CSeq: 11
+Server: AirTunes/220.68
+Content-Length: 0
+
+SET_PARAMETER rtsp://192.168.123.47/6108990559123033009 RTSP/1.0
+Content-Length: 18
+Content-Type: text/parameters
+CSeq: 12
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+volume: 0.000000
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:37 GMT
+CSeq: 12
+Server: AirTunes/220.68
+Content-Length: 0
+
+SET_PARAMETER rtsp://192.168.123.47/6108990559123033009 RTSP/1.0
+Content-Length: 18
+Content-Type: text/parameters
+CSeq: 13
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+volume: 0.000000
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:37 GMT
+CSeq: 13
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 14
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:39 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 15
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:41 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 16
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:43 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 17
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:45 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 18
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:47 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 19
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:49 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 20
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:51 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+SETUP rtsp://192.168.123.47/6108990559123033009 RTSP/1.0
+Content-Length: 199
+Content-Type: application/x-apple-binary-plist
+CSeq: 21
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+bplist00...Wstreams.........
+..
+.
+......ZlatencyMax^redundantAudioZlatencyMinRctSspf[controlPort[usingScreen[audioFormatTtype....................`....(3BMPT`lx}.......................................RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:52 GMT
+CSeq: 21
+Server: AirTunes/220.68
+Content-Length: 394
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+.<key>streams</key>
+.<array>
+..<dict>
+...<key>controlPort</key>
+...<integer>32896</integer>
+...<key>type</key>
+...<integer>96</integer>
+...<key>dataPort</key>
+...<integer>53670</integer>
+..</dict>
+.</array>
+</dict>
+</plist>SET_PARAMETER rtsp://192.168.123.47/6108990559123033009 RTSP/1.0
+Content-Length: 18
+Content-Type: text/parameters
+CSeq: 22
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+volume: 0.000000
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:52 GMT
+CSeq: 22
+Server: AirTunes/220.68
+Content-Length: 0
+
+FLUSH rtsp://192.168.123.47/6108990559123033009 RTSP/1.0
+RTP-Info: seq=8345;rtptime=1139329559
+CSeq: 23
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:53 GMT
+CSeq: 23
+Audio-Jack-Status: connected; type=digital
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 24
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:53 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 25
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:55 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 26
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:57 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 27
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:16:59 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 28
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:01 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 29
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:03 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 30
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:05 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 31
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:07 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 32
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:09 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 33
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:11 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 34
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:13 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 35
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:15 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 36
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:17 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 37
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:19 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 38
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:21 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 39
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:23 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 40
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:25 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 41
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:27 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 42
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:29 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 43
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:31 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+POST /feedback RTSP/1.0
+CSeq: 44
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:33 GMT
+Server: AirTunes/220.68
+Content-Length: 0
+
+TEARDOWN rtsp://192.168.123.47/6108990559123033009 RTSP/1.0
+Content-Length: 69
+Content-Type: application/x-apple-binary-plist
+CSeq: 45
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+bplist00...Wstreams.....Ttype.`......................................RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:34 GMT
+CSeq: 45
+Server: AirTunes/220.68
+Content-Length: 0
+
+SET_PARAMETER rtsp://192.168.123.47/6108990559123033009 RTSP/1.0
+Content-Length: 21
+Content-Type: text/parameters
+CSeq: 46
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+volume: -144.000000
+RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:34 GMT
+CSeq: 46
+Server: AirTunes/220.68
+Content-Length: 0
+
+TEARDOWN rtsp://192.168.123.47/6108990559123033009 RTSP/1.0
+Content-Length: 69
+Content-Type: application/x-apple-binary-plist
+CSeq: 47
+DACP-ID: E28CCF9054EDE3B9
+Active-Remote: 3016615115
+User-Agent: AirPlay/320.20
+
+bplist00...Wstreams.....Ttype.n......................................RTSP/1.0 200 OK
+Date: Thu, 19 Oct 2017 02:17:34 GMT
+CSeq: 47
+Server: AirTunes/220.68
+Content-Length: 0
+
+
+
+
+//SETUP 请求响应信令
+10-24 11:34:49.337 7397-8161/? D/RTSPResponder: [SETUP], dict  is <?xml version="1.0" encoding="UTF-8"?>
+                                                <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+                                                <plist version="1.0">
+                                                <dict>
+                                                	<key>et</key>
+                                                	<integer>32</integer>
+                                                	<key>name</key>
+                                                	<string>GrandStream-6plus</string>
+                                                	<key>sourceVersion</key>
+                                                	<string>320.20</string>
+                                                	<key>timingPort</key>
+                                                	<integer>51149</integer>
+                                                	<key>deviceID</key>
+                                                	<string>D8:BB:2C:1F:28:94</string>
+                                                	<key>model</key>
+                                                	<string>iPhone7,1</string>
+                                                	<key>macAddress</key>
+                                                	<string>D8:BB:2C:1F:28:92</string>
+                                                	<key>osBuildVersion</key>
+                                                	<string>14G60</string>
+                                                	<key>sessionUUID</key>
+                                                	<string>0DBDA1BF-5083-46E7-9F25-37143854A861</string>
+                                                	<key>ekey</key>
+                                                	<data>
+                                                		RlBMWQECAQAAAAA8AAAAAF5xvfwQNcVLHM2KurVtQCMAAAAQC8/GGZ7i56Hu5wMkHYQ0Bh/SImp90UX8SzQltjNHayrNtwmX
+                                                	</data>
+                                                	<key>eiv</key>
+                                                	<data>
+                                                		SdqQ7TXGEvz+R80Xi4IoaA==
+                                                	</data>
+                                                </dict>
+                                                </plist>
+10-24 11:34:49.337 7397-8161/? D/RTSPResponder: [SETUP], timingportObj  is 51149
+10-24 11:34:49.338 7397-8161/? D/RTSPResponder: [SETUP]response content is <?xml version="1.0" encoding="UTF-8"?>
+                                                <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+                                                <plist version="1.0">
+                                                <dict>
+                                                	<key>eventPort</key>
+                                                	<integer>12854</integer>
+                                                	<key>timingPort</key>
+                                                	<integer>22897</integer>
+                                                </dict>
+                                                </plist>
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+airplay 流程                                             
+POST /pair-verify RTSP/1.0
+X-Apple-PD: 1
+X-Apple-AbsoluteTime: 530074925
+Content-Type: application/octet-stream
+Content-Length: 68
+X-Apple-Device-ID: 0xd8bb2c1f2894
+X-Apple-Session-ID: 9c8fdadb-49f8-4e4a-98a5-89d49151b14e
+User-Agent: AirPlay/320.20
+
+....%"...;.4.l,[.#@.2..U"t.z......m.1t<..*....i1"m,.. g.|h.Y...t..M.HTTP/1.1 200 OK
+Date: Thu, 19 Oct 2017 03:02:20 GMT
+Content-Type: application/octet-stream
+Server: AirTunes/220.68
+Content-Length: 96
+
+w{....:.^(..4#.X..7..o..jQ..,..9.K...=v..HF.y)I.....F0|..7N. ."yP~...RyQ.m.4.?.?..u.RQ/. ..cE...POST /pair-setup RTSP/1.0
+Content-Type: application/octet-stream
+Content-Length: 32
+X-Apple-Device-ID: 0xd8bb2c1f2894
+X-Apple-Session-ID: 9c8fdadb-49f8-4e4a-98a5-89d49151b14e
+User-Agent: AirPlay/320.20
+
+1t<..*....i1"m,.. g.|h.Y...t..M.HTTP/1.1 200 OK
+Date: Thu, 19 Oct 2017 03:02:20 GMT
+Content-Type: application/octet-stream
+Server: AirTunes/220.68
+Content-Length: 32
+
+e.^.x..+.*. .,..6m....*.....&...POST /pair-verify RTSP/1.0
+X-Apple-PD: 1
+X-Apple-AbsoluteTime: 530074925
+Content-Type: application/octet-stream
+Content-Length: 68
+X-Apple-Device-ID: 0xd8bb2c1f2894
+X-Apple-Session-ID: 9c8fdadb-49f8-4e4a-98a5-89d49151b14e
+User-Agent: AirPlay/320.20
+
+....4....Z.
+./.9P..(...M......r.\.VT1t<..*....i1"m,.. g.|h.Y...t..M.HTTP/1.1 200 OK
+Date: Thu, 19 Oct 2017 03:02:21 GMT
+Content-Type: application/octet-stream
+Server: AirTunes/220.68
+Content-Length: 96
+
+.ek...w.
+.*...7.....m.T..S.....i.....|)).....i......a..+....R.8...z.j......d.DH........]K....;..POST /pair-verify RTSP/1.0
+X-Apple-PD: 1
+X-Apple-AbsoluteTime: 530074925
+Content-Type: application/octet-stream
+Content-Length: 68
+X-Apple-Device-ID: 0xd8bb2c1f2894
+X-Apple-Session-ID: 9c8fdadb-49f8-4e4a-98a5-89d49151b14e
+User-Agent: AirPlay/320.20
+
+.........;.*G.IDF.
+.i.Sq"..=....\$f.L........RQrt.u`..
+.......O4!2*.HTTP/1.1 200 OK
+Date: Thu, 19 Oct 2017 03:02:21 GMT
+Content-Type: application/octet-stream
+Server: AirTunes/220.68
+Content-Length: 0
+
+GET /server-info HTTP/1.1
+X-Apple-Client-Name: GrandStream-6plus
+X-Apple-VV: 16777984
+Content-Length: 0
+X-Apple-Device-ID: 0xd8bb2c1f2894
+X-Apple-Session-ID: 9c8fdadb-49f8-4e4a-98a5-89d49151b14e
+User-Agent: AirPlay/320.20
+
+HTTP/1.1 200 OK
+Date: Thu, 19 Oct 2017 03:02:21 GMT
+Content-Type: text/x-apple-plist+xml
+Content-Length: 580
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+.<key>features</key>
+.<integer>61647880183</integer>
+.<key>macAddress</key>
+.<string>00:0B:82:8B:57:1E</string>
+.<key>model</key>
+.<string>AppleTV3,1</string>
+.<key>osBuildVersion</key>
+.<string>12B435</string>
+.<key>protovers</key>
+.<string>1.0</string>
+.<key>srcvers</key>
+.<string>211.3</string>
+.<key>vv</key>
+.<integer>2</integer>
+.<key>deviceid</key>
+.<string>00:0B:82:8B:57:1E</string>
+</dict>
+</plist>POST /fp-setup HTTP/1.1
+Content-Type: application/octet-stream
+Content-Length: 16
+X-Apple-Device-ID: 0xd8bb2c1f2894
+X-Apple-Session-ID: 9c8fdadb-49f8-4e4a-98a5-89d49151b14e
+User-Agent: AirPlay/320.20
+
+FPLY............HTTP/1.1 200 OK
+Date: Thu, 19 Oct 2017 03:02:21 GMT
+CSeq: null
+Content-Type: application/octet-stream
+X-Apple-ET: null
+Server: AirTunes/220.68
+Content-Length: 142
+
+FPLY...........2.W..RO...z.d.{.D$...~.
+.z..]..'0.Y....:.M.......M...\{V....\...C....e.N.9.[..d..]..>.j.~.V.+..@Bu.ZD.Y.rV...Q8...'r..W.P.*.Fh.POST /fp-setup HTTP/1.1
+Content-Type: application/octet-stream
+Content-Length: 164
+X-Apple-Device-ID: 0xd8bb2c1f2894
+X-Apple-Session-ID: 9c8fdadb-49f8-4e4a-98a5-89d49151b14e
+User-Agent: AirPlay/320.20
+
+FPLY.............0.....?Fm...wt~...j....}{..Z...../bh.c....Q}.....).@...(..j{-..E-5..7L
+./...I...o..+
+.....3.i.....0.<p.\.&... ...o..3..k...\n...m1<....M.]..%b.Y..uHTTP/1.1 200 OK
+Date: Thu, 19 Oct 2017 03:02:21 GMT
+CSeq: null
+Content-Type: application/octet-stream
+X-Apple-ET: null
+Server: AirTunes/220.68
+Content-Length: 32
+
+FPLY.........m1<....M.]..%b.Y..uPOST /fp-setup2 HTTP/1.1
+Content-Type: application/octet-stream
+Content-Length: 120
+X-Apple-Device-ID: 0xd8bb2c1f2894
+X-Apple-Session-ID: 9c8fdadb-49f8-4e4a-98a5-89d49151b14e
+User-Agent: AirPlay/320.20
+
+FPLY.......l....9............6.....@....k.K&.C.....<.... v.....!.~@..*.vI....S._C..*....d.TJ..F1......Y.S.&...$.!..../.0HTTP/1.1 200 OK
+Content-Type: application/octet-stream
+Content-Length: 0
+
+...I&0.RBa......g...u..U..DPf.;f........i..Td....i..9.6Rl?8..=..#......vm.2
+...].+..QV....G.........hr6.jps.+.......k....R..v.#.E*..-.2..O.&.,........1R._(6a}u~G.p..2@. g'r..,k...`.[.a..c..f...^..6.B.'..P.#..7'K..^.i.#L..
+.x.-..8..R...$}'1y }........."..X}. `..CXmSi..R.^IP..b....F....]...
+N.`..?..F.K...M$...c....M|N9.~. .aF.|n.:9..Y..........o.x.&. .c
+4..0..".....C.&N....,;JM.........].^^N).&.o.9.Eq.vX..ei.[....)...>.t...t...8...&(..!...l|k.....l&&!..F...`...}..N6..@...3...dUB.+....-:..L.....&.|..R..c....B..zz.v......`.q.56m6r.7W..ON#.X.@.....zz.-.3yWB...oE..wT=..m0./M..gU..w,..^z....4.R.......Q...Ix...]^...v.....".T..,mQB............To..Y......",...2.....o....>*.....! .ThO....?.88.H...33.......a.!(....d..i2.....t.O..C3F.d.K..{.I8.s...]...s......X...kdCR....z=...:...)..u...iOM;)..l..&. .|,|...W..Z..=z2~...+...2..tb.>..ql.HX.
+D...2L..=..`a.E...K.W1..

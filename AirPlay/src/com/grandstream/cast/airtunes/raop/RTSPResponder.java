@@ -6,6 +6,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.dd.plist.BinaryPropertyListParser;
+import com.dd.plist.BinaryPropertyListWriter;
 import com.dd.plist.NSArray;
 import com.dd.plist.NSData;
 import com.dd.plist.NSDictionary;
@@ -285,7 +286,7 @@ public class RTSPResponder extends Thread{
 					        	reponsedict.put("eventPort",  mAudioServer.getControlPort());
 					        	reponsedict.put("timingPort", mAudioServer.getTimingPort());
 					        	Log.d(TAG,"[SETUP]response content is "+reponsedict.toXMLPropertyList());
-								byte[] contents = reponsedict.toXMLPropertyList().getBytes();
+								byte[] contents = BinaryPropertyListWriter.writeToArray(reponsedict);
 								response.append("Content-Length", contents.length+"");
 					        	response.setContent(contents, 0, contents.length);
 							}
