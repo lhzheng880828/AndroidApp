@@ -1,6 +1,0 @@
-<resources>
-
-    <!-- For downlodadapter -->
-    <item type="id" name="holder"/>
-    <item type="id" name="taskid"/>
-</resources>
